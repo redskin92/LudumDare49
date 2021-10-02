@@ -30,4 +30,9 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 			rbody.isKinematic = true;
 		}
 	}
+
+	public virtual void ItemUse(InputAction action)
+	{
+		Debug.Log("USING ITEM");
+	}
 }
