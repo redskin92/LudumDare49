@@ -69,6 +69,7 @@ public class PlayerInventory : MonoBehaviour
 		StopAllCoroutines();
 
 		playerInteract.enabled = true;
+		Busy = false;
 
 		itemUseAction.Disable();
 		itemDropAction.Disable();

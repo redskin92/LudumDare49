@@ -9,15 +9,18 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 	public string InteractionName => interactionName;
 
 	private Rigidbody rbody;
+	private Collider objectCollider;
 
 
 	protected virtual void Awake()
 	{
-		rbody = GetComponent<Rigidbody>(); 
+		rbody = GetComponent<Rigidbody>();
+		objectCollider = GetComponent<Collider>();
 	}
 
 	public void DropItem()
 	{
+		objectCollider.enabled = true;
 		rbody.isKinematic = false;
 	}
 
@@ -28,6 +31,7 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 
 		if(inventory.EquipItem(this))
 		{
+			objectCollider.enabled = false;
 			rbody.isKinematic = true;
 		}
 	}
