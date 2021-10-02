@@ -15,7 +15,6 @@ public class ButtonStartGame : MenuButtons
     public override void PressButton()
     {
         PlayPressedSound();
-        //GameFlow.Instance.StartGame();
-        gameObject.SetActive(false);
+        LevelManager.Instance.TransitionToPlay();
     }
 }
