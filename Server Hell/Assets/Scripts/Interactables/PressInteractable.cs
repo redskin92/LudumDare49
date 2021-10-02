@@ -14,7 +14,7 @@ public class PressInteractable : MonoBehaviour, IInteractable
 
     public void Interact(InputAction action)
     {
-        if (!Interactable && Interacted != null)
+        if (Interacted != null)
             Interacted();
     }
 }

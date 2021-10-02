@@ -13,8 +13,6 @@ public class TestInteractable : MonoBehaviour, IInteractable
 
 	public void Interact(InputAction action)
     {
-		if (!Interactable) return;
-
         Debug.Log("Interaction detected!  Hey there :)");
     }
 }

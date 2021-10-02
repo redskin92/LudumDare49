@@ -34,8 +34,6 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 
 	public void Interact(InputAction action)
     {
-		if (!Interactable) return;
-
         action.canceled += Action_Canceled;
 
         StartCoroutine("StartInteractionSequence", action);

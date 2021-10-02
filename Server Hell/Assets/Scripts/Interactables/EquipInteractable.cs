@@ -28,8 +28,6 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 
 	public void Interact(InputAction action)
 	{
-		if (!Interactable) return;
-
 		var player = GameObject.FindGameObjectWithTag("Player");
 		var inventory = player.GetComponent<PlayerInventory>();
 

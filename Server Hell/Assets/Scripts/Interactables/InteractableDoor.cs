@@ -48,8 +48,6 @@ public class InteractableDoor : MonoBehaviour, IInteractable
 
     public void Interact(InputAction action)
     {
-		if (!Interactable) return;
-
         doorOpenedStatus = !doorOpenedStatus;
         
         if(!doorOpenedStatus)

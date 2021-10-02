@@ -12,7 +12,7 @@ public class ServerTask : UrgentTaskBase
 	public void Awake()
 	{
 		serverIteractable.Interactable = false;
-		serverIteractable.ProgressComplete += ServerRepaired;
+		serverIteractable.ProgressComplete += ServerRepaired;	
 	}
 
 	public override void ActivateTask()

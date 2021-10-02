@@ -83,7 +83,7 @@ public class PlayerInteract : MonoBehaviour
             if (hits[i].transform.tag == "Interactable")
             {
                 var comp = hits[i].transform.GetComponent<IInteractable>();
-                if (comp != null)
+                if (comp != null && comp.Interactable)
                 {
                     interactable = comp;
                     break;

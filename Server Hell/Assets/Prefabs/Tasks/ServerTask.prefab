@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2273698615738059726}
   m_Layer: 0
   m_Name: ServerObject
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,5 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Server Repair
+  stabilityGainOnSuccess: 0
+  stabilityLossOnFail: 0
   serverIteractable: {fileID: 2273698615738059726}
   failTimer: 30
