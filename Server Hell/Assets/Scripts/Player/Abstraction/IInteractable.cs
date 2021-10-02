@@ -1,7 +1,8 @@
+using UnityEngine.InputSystem;
 
 public interface IInteractable
 {
     string InteractionName { get; }
 
-    void Interact();
+    void Interact(InputAction action);
 }

@@ -362,6 +362,30 @@ MonoBehaviour:
   interactDistance: 5
   interactionTextMesh: {fileID: 0}
   cameraT: {fileID: 0}
+  interactAction:
+    m_Name: Interact
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 0129fe47-a39b-4a3f-a652-72a3f1adcb67
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 2694128d-db54-4c3a-ad58-def12f9d2618
+      m_Path: <Keyboard>/e
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 5f668bd5-1751-4f82-ad6e-7b09d75afbf8
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact
+      m_Flags: 0
 --- !u!1001 &3457656204623732998
 PrefabInstance:
   m_ObjectHideFlags: 0

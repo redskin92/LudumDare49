@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 /// <summary>
@@ -17,22 +18,27 @@ public class PlayerInteract : MonoBehaviour
 
     public Transform cameraT;
 
+    public InputAction interactAction;
+
     /// <summary>
     /// The object we would interact with if we press the
     /// Interact key.
     /// </summary>
     private IInteractable curInteractable;
 
-    /// <summary>
-    /// This is fired as a result of an input message
-    /// received from the 'Player Input' component.
-    /// </summary>
-    public void OnInteract()
+    private void Awake()
     {
-        if (curInteractable != null)
-            curInteractable.Interact();
-        else
-            Debug.Log("No targets!");
+        interactAction.started += InteractAction_started;
+    }
+
+    private void OnEnable()
+    {
+        interactAction.Enable();
+    }
+
+    private void OnDisable()
+    {
+        interactAction.Disable();
     }
 
     private void Update()
@@ -55,6 +61,14 @@ public class PlayerInteract : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(cameraT.position, cameraT.forward * interactDistance);
+    }
+
+    private void Interact()
+    {
+        if (curInteractable != null)
+            curInteractable.Interact(interactAction);
+        else
+            Debug.Log("No targets!");
     }
 
     /// <summary>
@@ -80,5 +94,10 @@ public class PlayerInteract : MonoBehaviour
         }
 
         return interactable;
+    }
+
+    private void InteractAction_started(InputAction.CallbackContext obj)
+    {
+        Interact();
     }
 }
