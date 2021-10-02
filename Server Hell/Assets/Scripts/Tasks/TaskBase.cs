@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class TaskBase : MonoBehaviour
@@ -9,6 +7,8 @@ public abstract class TaskBase : MonoBehaviour
 
     [NonSerialized]
     public bool completed = false;
+
+    public bool IsActive { get; protected set; }
 
     public event Action<TaskBase> TaskComplete;
 
@@ -23,5 +23,8 @@ public abstract class TaskBase : MonoBehaviour
     /// <summary>
     /// Make this task become active.
     /// </summary>
-    public abstract void ActivateTask();
+    public virtual void ActivateTask()
+    {
+        IsActive = true;
+    }
 }

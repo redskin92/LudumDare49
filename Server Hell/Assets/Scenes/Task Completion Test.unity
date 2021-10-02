@@ -1224,6 +1224,8 @@ MonoBehaviour:
   routineTasks:
   - {fileID: 791093626}
   urgentTasks: []
+  minUrgentSpawnTime: 5
+  maxUrgentSpawnTime: 15
 --- !u!4 &1811917547
 Transform:
   m_ObjectHideFlags: 0

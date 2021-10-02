@@ -7,12 +7,7 @@ public class PhonesTask : TaskBase
     public Image image;
 
     private HoldInteractable holdInteractable;
-    private bool started;
-
-    public override void ActivateTask()
-    {
-        // TODO
-    }
+    private bool interactionStarted;
 
     private void Awake()
     {
@@ -31,7 +26,7 @@ public class PhonesTask : TaskBase
 
     private void Update()
     {
-        if (started)
+        if (interactionStarted)
             image.fillAmount = holdInteractable.CurrentProgress;
     }
 
@@ -53,16 +48,18 @@ public class PhonesTask : TaskBase
     {
         image.gameObject.SetActive(true);
 
-        started = true;
+        interactionStarted = true;
     }
 
     private void HoldInteractable_ProgressComplete()
     {
         image.gameObject.SetActive(false);
 
-        started = false;
+        interactionStarted = false;
 
         UnregisterEvents();
+
+        IsActive = false;
 
         FireTaskComplete();
     }
@@ -71,6 +68,6 @@ public class PhonesTask : TaskBase
     {
         image.gameObject.SetActive(false);
 
-        started = false;
+        interactionStarted = false;
     }
 }
