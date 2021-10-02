@@ -11,6 +11,8 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 	private Rigidbody rbody;
 	private Collider objectCollider;
 
+	public bool Interactable { get; set; } = true;
+
 
 	protected virtual void Awake()
 	{
@@ -26,6 +28,8 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 
 	public void Interact(InputAction action)
 	{
+		if (!Interactable) return;
+
 		var player = GameObject.FindGameObjectWithTag("Player");
 		var inventory = player.GetComponent<PlayerInventory>();
 

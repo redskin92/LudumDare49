@@ -9,8 +9,12 @@ public class TestInteractable : MonoBehaviour, IInteractable
 
     public string InteractionName => interactionName;
 
-    public void Interact(InputAction action)
+	public bool Interactable { get; set; } = true;
+
+	public void Interact(InputAction action)
     {
+		if (!Interactable) return;
+
         Debug.Log("Interaction detected!  Hey there :)");
     }
 }

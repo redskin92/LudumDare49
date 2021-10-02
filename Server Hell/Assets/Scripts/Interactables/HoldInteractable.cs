@@ -30,8 +30,12 @@ public class HoldInteractable : MonoBehaviour, IInteractable
     /// </summary>
     public float CurrentProgress { get; private set; }
 
-    public void Interact(InputAction action)
+	public bool Interactable { get; set; } = true;
+
+	public void Interact(InputAction action)
     {
+		if (!Interactable) return;
+
         action.canceled += Action_Canceled;
 
         StartCoroutine("StartInteractionSequence", action);

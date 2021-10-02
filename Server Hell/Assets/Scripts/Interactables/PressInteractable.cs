@@ -8,11 +8,13 @@ public class PressInteractable : MonoBehaviour, IInteractable
 
     public event Action Interacted;
 
-    public string InteractionName => interactionName;
+	public bool Interactable { get; set; } = true;
+
+	public string InteractionName => interactionName;
 
     public void Interact(InputAction action)
     {
-        if (Interacted != null)
+        if (!Interactable && Interacted != null)
             Interacted();
     }
 }

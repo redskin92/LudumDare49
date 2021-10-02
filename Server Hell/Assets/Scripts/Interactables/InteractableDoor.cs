@@ -25,12 +25,14 @@ public class InteractableDoor : MonoBehaviour, IInteractable
 
     [SerializeField]
     protected float duration;
-    
-    #endregion
 
-    #region Private Fields
+	public bool Interactable { get; set; } = true;
 
-    private bool doorOpenedStatus = false;
+	#endregion
+
+	#region Private Fields
+
+	private bool doorOpenedStatus = false;
     
     public string interactionName = "Open/Close A Door";
 
@@ -46,6 +48,8 @@ public class InteractableDoor : MonoBehaviour, IInteractable
 
     public void Interact(InputAction action)
     {
+		if (!Interactable) return;
+
         doorOpenedStatus = !doorOpenedStatus;
         
         if(!doorOpenedStatus)
