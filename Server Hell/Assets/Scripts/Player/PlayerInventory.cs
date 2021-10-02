@@ -1,17 +1,22 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerInventory : MonoBehaviour
 {
+	[SerializeField] private PlayerInteract playerInteract;
 	[SerializeField] private Transform EquipLocation;
 	public InputAction itemUseAction;
 	public InputAction itemDropAction;
 
+	private string dropAction = "Press Q to drop";
 
 	private EquipInteractable currentlyEquipedItem;
 	private Transform equipedItemPrevParent;
 	private bool Busy = false;
+
+	private TextMeshProUGUI interactionTextMesh => playerInteract.interactionTextMesh;
 
 	private void Awake()
 	{
@@ -24,29 +29,28 @@ public class PlayerInventory : MonoBehaviour
 	private void ItemUseAction(InputAction.CallbackContext obj)
 	{
 		if (currentlyEquipedItem == null) return;
-
 		currentlyEquipedItem.ItemUsePressed(itemUseAction);
 	}
 
 	private void ItemUseCancelled(InputAction.CallbackContext obj)
 	{
 		if (currentlyEquipedItem == null) return;
-
 		currentlyEquipedItem.ItemUseReleased(itemUseAction);
 	}
 
 	private void ItemDropAction(InputAction.CallbackContext obj)
 	{
 		if (currentlyEquipedItem == null) return;
-
-		itemUseAction.Disable();
-		itemDropAction.Disable();
 		DropItem();
 	}
 
 	public bool EquipItem(EquipInteractable itemToEquip)
 	{
 		if (currentlyEquipedItem != null || Busy) return false;
+
+		playerInteract.enabled = false;
+
+		interactionTextMesh.text = dropAction + '\n' + itemToEquip.useActionName;
 
 		itemUseAction.Enable();
 		itemDropAction.Enable();
@@ -64,7 +68,12 @@ public class PlayerInventory : MonoBehaviour
 	{
 		StopAllCoroutines();
 
-		if(currentlyEquipedItem != null)
+		playerInteract.enabled = true;
+
+		itemUseAction.Disable();
+		itemDropAction.Disable();
+
+		if (currentlyEquipedItem != null)
 		{
 			currentlyEquipedItem.transform.SetParent(equipedItemPrevParent, true);
 			currentlyEquipedItem.DropItem();

@@ -430,6 +430,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39267e779bc78254f80a1c52896d1a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInteract: {fileID: 1550399372}
   EquipLocation: {fileID: 3715676074452664128}
   itemUseAction:
     m_Name: Item Use

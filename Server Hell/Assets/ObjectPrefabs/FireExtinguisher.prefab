@@ -4850,7 +4850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c92c9dd97e73b4c909b5e314c7551b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionName: Equip
+  interactionName: Press 'E' to Equip
   whiteShitThatComesout: {fileID: 5763899534506763059}
 --- !u!65 &820146181034623557
 BoxCollider:

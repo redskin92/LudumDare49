@@ -3,7 +3,8 @@ using UnityEngine.InputSystem;
 
 public class EquipInteractable : MonoBehaviour, IInteractable
 {
-	public string interactionName = "Equip";
+	public string interactionName = "Press 'E' to Equip";
+	public virtual string useActionName => "Left Click to use";
 
 	public string InteractionName => interactionName;
 
