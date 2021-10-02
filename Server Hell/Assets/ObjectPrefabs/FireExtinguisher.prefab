@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2449017680643302
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3551716798722124510}
+  - component: {fileID: 1683149269222713616}
+  m_Layer: 0
+  m_Name: StreamHitbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3551716798722124510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449017680643302}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.22275001, z: -0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2278313696644975375}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1683149269222713616
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2449017680643302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 2, z: 0.5}
+  m_Center: {x: 0, y: 1.61, z: 0}
 --- !u!1 &2122240291140847238
 GameObject:
   m_ObjectHideFlags: 0
@@ -4834,6 +4878,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 3551716798722124510}
   - {fileID: 9013293924115323547}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -4852,6 +4897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionName: Press 'E' to Equip
   whiteShitThatComesout: {fileID: 5763899534506763059}
+  streamCollider: {fileID: 1683149269222713616}
 --- !u!65 &820146181034623557
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4912,7 +4958,7 @@ Transform:
   m_Children:
   - {fileID: 9013293924837709284}
   m_Father: {fileID: 2278313696644975375}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9013293924115323540
 MeshFilter:

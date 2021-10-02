@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 public class FireExtinquisher : EquipInteractable
 {
 	[SerializeField] private ParticleSystem whiteShitThatComesout;
+	[SerializeField] private BoxCollider streamCollider;
 
 	protected override void Awake()
 	{
@@ -16,6 +17,7 @@ public class FireExtinquisher : EquipInteractable
 		base.ItemUsePressed(action);
 
 		whiteShitThatComesout.Play();
+		streamCollider.gameObject.SetActive(true);
 	}
 
 	public override void ItemUseReleased(InputAction action)
@@ -23,5 +25,6 @@ public class FireExtinquisher : EquipInteractable
 		base.ItemUseReleased(action);
 
 		whiteShitThatComesout.Stop();
+		streamCollider.gameObject.SetActive(false);
 	}
 }
