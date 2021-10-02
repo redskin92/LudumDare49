@@ -28,21 +28,35 @@ public class MenuButtonController : MonoBehaviour
     private void Awake()
     {
         UpdateSelectedButton(false);
+    }
+
+    private void OnEnable()
+    {
+        EnableButtons();
 
         navigateUp.canceled += Navigate_Up;
         navigateDown.canceled += Navigate_Down;
         buttonActivate.canceled += Select_Button;
     }
 
-    private void OnEnable()
+    private void OnDisable()
+    {
+        DisableButtons();
+    }
+
+    public void EnableButtons()
     {
         navigateUp.Enable();
         navigateDown.Enable();
         buttonActivate.Enable();
     }
 
-    private void OnDisable()
+    public void DisableButtons()
     {
+        navigateUp.canceled -= Navigate_Up;
+        navigateDown.canceled -= Navigate_Down;
+        buttonActivate.canceled -= Select_Button;
+
         navigateUp.Disable();
         navigateDown.Disable();
         buttonActivate.Disable();
