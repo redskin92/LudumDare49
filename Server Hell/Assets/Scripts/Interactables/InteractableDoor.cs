@@ -35,17 +35,13 @@ public class InteractableDoor : MonoBehaviour, IInteractable
     public string interactionName = "Open/Close A Door";
 
     [SerializeField]
-    protected Vector3 defaultRotatation;
+    protected Vector3 defaultRotation;
     
     [SerializeField]
-    protected Vector3 targetRotatation;
+    protected Vector3 targetRotation;
     #endregion
 
-    private void Start()
-    {
-       // defaultPivot = pivot.transform.eulerAngles;
-    }
-
+  
     public string InteractionName => interactionName;
 
     public void Interact(InputAction action)
@@ -53,23 +49,21 @@ public class InteractableDoor : MonoBehaviour, IInteractable
         doorOpenedStatus = !doorOpenedStatus;
         
         if(!doorOpenedStatus)
-            StartCoroutine(RotateDoor(pivot.transform.eulerAngles + targetRotatation));
+            StartCoroutine(RotateDoor(pivot.transform.localEulerAngles + targetRotation));
         else
-            StartCoroutine(RotateDoor(defaultRotatation));
+            StartCoroutine(RotateDoor(pivot.transform.localEulerAngles + defaultRotation));
     }
 
     private IEnumerator RotateDoor(Vector3 rot)
     {
         float counter = 0;
 
-        Vector3 angle ;
-        
-        angle = pivot.transform.eulerAngles;
+        Vector3 angle = pivot.transform.eulerAngles;
         
         while (counter < duration)
         { 
             counter += Time.deltaTime;
-            pivot.transform.eulerAngles = Vector3.Lerp(angle, rot, counter / duration);
+            pivot.transform.localEulerAngles = Vector3.Lerp(angle, rot, counter / duration);
             yield return null;
         }
     }
