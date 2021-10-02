@@ -7,16 +7,13 @@ public abstract class TaskBase : MonoBehaviour
 
     public int stabilityGainOnSuccess;
 
-    [NonSerialized]
-    public bool completed = false;
-
-    public bool IsActive { get; protected set; }
+	public bool IsActive { get; protected set; }
 
     public event Action<TaskBase> TaskComplete;
 
     public void FireTaskComplete()
     {
-        completed = true;
+		IsActive = false;
 
         if (TaskComplete != null)
             TaskComplete(this);

@@ -8,8 +8,6 @@ public abstract class UrgentTaskBase : TaskBase
 
 	public void FireTaskFailed()
 	{
-		completed = true;
-
 		if (TaskFailed != null)
 			TaskFailed(this);
 	}
