@@ -19,12 +19,10 @@ public class FireOutbreakTask : UrgentTaskBase
 
 	public override void ActivateTask()
 	{
-		base.ActivateTask();
 		activeFires.Clear();
 		availableSpawnLocations = new List<Transform>(fireSpawnLocations);
 		SpawnFire();
 		base.ActivateTask();
-		completed = false;
 	}
 
 	private void SpawnFire()
@@ -49,7 +47,7 @@ public class FireOutbreakTask : UrgentTaskBase
 
 	public void Update()
 	{
-		if (!IsActive || completed) return;
+		if (!IsActive) return;
 
 		countUntilNextFire -= Time.deltaTime;
 
