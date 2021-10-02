@@ -6,6 +6,8 @@ using UnityEngine;
 public abstract class TaskBase : MonoBehaviour
 {
     public string taskName;
+
+    [NonSerialized]
     public bool completed = false;
 
     public event Action<TaskBase> TaskComplete;
@@ -17,4 +19,9 @@ public abstract class TaskBase : MonoBehaviour
         if (TaskComplete != null)
             TaskComplete(this);
     }
+
+    /// <summary>
+    /// Make this task become active.
+    /// </summary>
+    public abstract void ActivateTask();
 }
