@@ -10,7 +10,7 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 	private Rigidbody rbody;
 
 
-	public void Awake()
+	protected virtual void Awake()
 	{
 		rbody = GetComponent<Rigidbody>(); 
 	}
