@@ -13,8 +13,10 @@ public class BackgroundFadeManager : MonoBehaviour
     [SerializeField]
     protected Image fadeImage;
 
-    float fadeTime = 1.0f;
-    float currentFadeTime = 1.0f;
+    [SerializeField]
+    protected float fadeTime;
+
+    float currentFadeTime = 0f;
 
     bool fadeDone = false;
 
@@ -23,6 +25,12 @@ public class BackgroundFadeManager : MonoBehaviour
     public event Action<BackgroundFadeManager> FadeInComplete;
 
     public event Action<BackgroundFadeManager> FadeOutComplete;
+
+    private void Awake()
+    {
+        // set to fade in from the start
+        currentFadeTime = fadeTime;
+    }
 
     // fade out the screen whenever needed
     void Update ()

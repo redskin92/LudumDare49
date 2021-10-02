@@ -15,6 +15,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     protected string mainMenu;
 
+    [SerializeField]
+    protected float fadeTime = 1.0f;
+
     protected List<string> activeScenes;
 
     public event Action<LevelManager> TransitionComplete;
@@ -175,7 +178,7 @@ public class LevelManager : MonoBehaviour
     protected void StartTransition()
     {
         backgroundFadeManager.FadeInComplete += FadeInCompleted;
-        backgroundFadeManager.SetTimer(0.5f, true);
+        backgroundFadeManager.SetTimer(fadeTime, true);
     }
 
     IEnumerator waitForSceneLoad(string sceneName)
@@ -186,7 +189,7 @@ public class LevelManager : MonoBehaviour
         }
 
         backgroundFadeManager.FadeOutComplete += FadeOutCompleted;
-        backgroundFadeManager.SetTimer(0.5f, false);
+        backgroundFadeManager.SetTimer(fadeTime, false);
     }
 
     IEnumerator waitForSceneUnLoad(string sceneName)
