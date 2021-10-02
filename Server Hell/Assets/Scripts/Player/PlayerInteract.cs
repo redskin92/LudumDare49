@@ -7,8 +7,6 @@ using TMPro;
 /// </summary>
 public class PlayerInteract : MonoBehaviour
 {
-    private const string INTERACTION_FORMAT_STRING = "Press 'E' to {0}";
-
     public float interactDistance = 5f;
 
     /// <summary>
@@ -49,7 +47,7 @@ public class PlayerInteract : MonoBehaviour
 
         if (curInteractable != null)
         {
-            interactionTextMesh.text = string.Format(INTERACTION_FORMAT_STRING, curInteractable.InteractionName);
+            interactionTextMesh.text = curInteractable.InteractionName;
             interactionTextMesh.gameObject.SetActive(true);
         }
         else
