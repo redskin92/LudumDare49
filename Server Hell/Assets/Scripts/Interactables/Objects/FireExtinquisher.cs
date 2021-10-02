@@ -11,10 +11,17 @@ public class FireExtinquisher : EquipInteractable
 		whiteShitThatComesout.Stop();
 	}
 
-	public override void ItemUse(InputAction action)
+	public override void ItemUsePressed(InputAction action)
 	{
-		base.ItemUse(action);
+		base.ItemUsePressed(action);
 
 		whiteShitThatComesout.Play();
+	}
+
+	public override void ItemUseReleased(InputAction action)
+	{
+		base.ItemUseReleased(action);
+
+		whiteShitThatComesout.Stop();
 	}
 }

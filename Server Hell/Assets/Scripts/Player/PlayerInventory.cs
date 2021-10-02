@@ -16,6 +16,8 @@ public class PlayerInventory : MonoBehaviour
 	private void Awake()
 	{
 		itemUseAction.started += ItemUseAction;
+		itemUseAction.canceled += ItemUseCancelled;
+
 		itemDropAction.started += ItemDropAction;
 	}
 
@@ -23,7 +25,14 @@ public class PlayerInventory : MonoBehaviour
 	{
 		if (currentlyEquipedItem == null) return;
 
-		currentlyEquipedItem.ItemUse(itemUseAction);
+		currentlyEquipedItem.ItemUsePressed(itemUseAction);
+	}
+
+	private void ItemUseCancelled(InputAction.CallbackContext obj)
+	{
+		if (currentlyEquipedItem == null) return;
+
+		currentlyEquipedItem.ItemUseReleased(itemUseAction);
 	}
 
 	private void ItemDropAction(InputAction.CallbackContext obj)

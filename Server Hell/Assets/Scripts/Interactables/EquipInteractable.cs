@@ -31,8 +31,7 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 		}
 	}
 
-	public virtual void ItemUse(InputAction action)
-	{
-		Debug.Log("USING ITEM");
-	}
+	public virtual void ItemUsePressed(InputAction action) {	}
+
+	public virtual void ItemUseReleased(InputAction action)	{	}
 }
