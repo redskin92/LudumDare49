@@ -722,7 +722,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Answer Phones
+  stabilityGainOnSuccess: 10
+  stabilityLossOnFail: 3
   image: {fileID: 1286741342}
+  timeBeforeFail: 10
 --- !u!1 &874605735
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,8 +1224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958523310c8d700489581cd6613464ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  routineTasks:
-  - {fileID: 791093626}
+  routineTasks: []
   urgentTasks: []
   minUrgentSpawnTime: 5
   maxUrgentSpawnTime: 15

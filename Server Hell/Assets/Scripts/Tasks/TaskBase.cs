@@ -5,6 +5,8 @@ public abstract class TaskBase : MonoBehaviour
 {
     public string taskName;
 
+    public int stabilityGainOnSuccess;
+
     [NonSerialized]
     public bool completed = false;
 

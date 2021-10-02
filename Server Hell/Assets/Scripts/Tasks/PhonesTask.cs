@@ -2,9 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HoldInteractable))]
-public class PhonesTask : TaskBase
+public class PhonesTask : UrgentTaskBase
 {
     public Image image;
+    public float timeBeforeFail = 10f;
 
     private HoldInteractable holdInteractable;
     private bool interactionStarted;
@@ -17,6 +18,8 @@ public class PhonesTask : TaskBase
     private void Start()
     {
         RegisterEvents();
+
+        InvokeRepeating("Fail", timeBeforeFail, timeBeforeFail);
     }
 
     private void OnDestroy()
@@ -42,6 +45,11 @@ public class PhonesTask : TaskBase
         holdInteractable.ProgressStarted -= HoldInteractable_ProgressStarted;
         holdInteractable.ProgressComplete -= HoldInteractable_ProgressComplete;
         holdInteractable.ProgressCanceled -= HoldInteractable_ProgressCanceled;
+    }
+
+    private void Fail()
+    {
+        FireTaskFailed();
     }
 
     private void HoldInteractable_ProgressStarted()

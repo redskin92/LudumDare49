@@ -1,11 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 public abstract class UrgentTaskBase : TaskBase
 {
-    public event Action<TaskBase> TaskFailed;
+    public int stabilityLossOnFail;
+
+    public event Action<UrgentTaskBase> TaskFailed;
 
 	public void FireTaskFailed()
 	{
@@ -14,5 +13,4 @@ public abstract class UrgentTaskBase : TaskBase
 		if (TaskFailed != null)
 			TaskFailed(this);
 	}
-
 }

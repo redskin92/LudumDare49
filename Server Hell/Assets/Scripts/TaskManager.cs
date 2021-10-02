@@ -117,7 +117,7 @@ public class TaskManager : MonoBehaviour
             Win();
     }
 
-    private void UrgentTask_TaskFailed(TaskBase task)
+    private void UrgentTask_TaskFailed(UrgentTaskBase task)
     {
         Debug.Log($"{task.taskName} failed!");
     }
