@@ -7,8 +7,27 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 
 	public string InteractionName => interactionName;
 
+	private Rigidbody rbody;
+
+
+	public void Awake()
+	{
+		rbody = GetComponent<Rigidbody>(); 
+	}
+
+	public void DropItem()
+	{
+		rbody.isKinematic = false;
+	}
+
 	public void Interact(InputAction action)
 	{
-		Debug.Log("Interaction detected!  Hey there :)");
+		var player = GameObject.FindGameObjectWithTag("Player");
+		var inventory = player.GetComponent<PlayerInventory>();
+
+		if(inventory.EquipItem(this))
+		{
+			rbody.isKinematic = true;
+		}
 	}
 }
