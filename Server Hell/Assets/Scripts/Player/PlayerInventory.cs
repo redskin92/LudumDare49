@@ -5,7 +5,9 @@ using UnityEngine.InputSystem;
 public class PlayerInventory : MonoBehaviour
 {
 	[SerializeField] private Transform EquipLocation;
-	public InputAction interactAction;
+	public InputAction itemUseAction;
+	public InputAction itemDropAction;
+
 
 	private EquipInteractable currentlyEquipedItem;
 	private Transform equipedItemPrevParent;
@@ -13,30 +15,32 @@ public class PlayerInventory : MonoBehaviour
 
 	private void Awake()
 	{
-		interactAction.started += InteractAction_started;
+		itemUseAction.started += ItemUseAction;
+		itemDropAction.started += ItemDropAction;
 	}
 
-	private void OnEnable()
+	private void ItemUseAction(InputAction.CallbackContext obj)
 	{
-		interactAction.Enable();
+		if (currentlyEquipedItem == null) return;
+
+		currentlyEquipedItem.ItemUse(itemUseAction);
 	}
 
-	private void OnDisable()
+	private void ItemDropAction(InputAction.CallbackContext obj)
 	{
-		interactAction.Disable();
-	}
+		if (currentlyEquipedItem == null) return;
 
-	private void InteractAction_started(InputAction.CallbackContext obj)
-	{
-		if (currentlyEquipedItem != null)
-			currentlyEquipedItem.ItemUse(interactAction);
-		else
-			Debug.Log("No targets!");
+		itemUseAction.Disable();
+		itemDropAction.Disable();
+		DropItem();
 	}
 
 	public bool EquipItem(EquipInteractable itemToEquip)
 	{
 		if (currentlyEquipedItem != null || Busy) return false;
+
+		itemUseAction.Enable();
+		itemDropAction.Enable();
 
 		equipedItemPrevParent = itemToEquip.transform.parent;
 		currentlyEquipedItem = itemToEquip;

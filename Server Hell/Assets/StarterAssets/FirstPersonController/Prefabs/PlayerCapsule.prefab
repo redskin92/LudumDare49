@@ -398,7 +398,7 @@ MonoBehaviour:
     m_Name: Interact
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 0129fe47-a39b-4a3f-a652-72a3f1adcb67
+    m_Id: 50a7ca16-192e-4e09-b44b-ba0c48974e4e
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
@@ -431,6 +431,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EquipLocation: {fileID: 3715676074452664128}
+  itemUseAction:
+    m_Name: Item Use
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e6ec4db7-b0c3-4fe5-8c0b-310bb7e5e7f7
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: bbff0819-2c12-4301-8dd5-841faaffc0ca
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Item Use
+      m_Flags: 0
+  itemDropAction:
+    m_Name: Item Drop
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: edbf3146-1ab5-4e6b-bd77-d7d3aa9cc268
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 8d763889-6e86-4809-83ee-880e1cd47dba
+      m_Path: <Keyboard>/q
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Item Drop
+      m_Flags: 0
 --- !u!1001 &3457656204623732998
 PrefabInstance:
   m_ObjectHideFlags: 0
