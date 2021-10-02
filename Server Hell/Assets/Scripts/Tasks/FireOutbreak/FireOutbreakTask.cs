@@ -13,20 +13,23 @@ public class FireOutbreakTask : UrgentTaskBase
 	private float countUntilNextFire;
 
 	private List<Transform> availableSpawnLocations;
-	private Dictionary<FireObject, Transform> activeFires;
+	private Dictionary<FireObject, Transform> activeFires = new Dictionary<FireObject, Transform>();
 
 	private System.Random random = new System.Random();
-	
 
 	public override void ActivateTask()
 	{
-		availableSpawnLocations = fireSpawnLocations;
+		base.ActivateTask();
+		activeFires.Clear();
+		availableSpawnLocations = new List<Transform>(fireSpawnLocations);
 		SpawnFire();
+		base.ActivateTask();
 		completed = false;
 	}
 
 	private void SpawnFire()
 	{
+		countUntilNextFire = (float)random.Next(minFireSpawnInterval, maxFireSpawnInterval);
 
 		if (availableSpawnLocations.Count <= 0)
 		{
@@ -46,13 +49,12 @@ public class FireOutbreakTask : UrgentTaskBase
 
 	public void Update()
 	{
-		if (completed) return;
+		if (!IsActive || completed) return;
 
 		countUntilNextFire -= Time.deltaTime;
 
 		if(countUntilNextFire <= 0f)
 		{
-			countUntilNextFire = (float)random.Next(minFireSpawnInterval, maxFireSpawnInterval);
 			SpawnFire();
 		}
 	}
