@@ -10,24 +10,50 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 
     public string InteractionName => interactionName;
 
+    /// <summary>
+    /// Fired when the interaction begins.
+    /// </summary>
+    public event Action ProgressStarted;
+
+    /// <summary>
+    /// Fired when the interaction is complete.
+    /// </summary>
     public event Action ProgressComplete;
+
+    /// <summary>
+    /// Fired when the user cancels the interaction.
+    /// </summary>
+    public event Action ProgressCanceled;
+
+    /// <summary>
+    /// The current progress as a float between 0 and 1.
+    /// </summary>
+    public float CurrentProgress { get; private set; }
 
     public void Interact(InputAction action)
     {
         action.canceled += Action_Canceled;
 
-        StartCoroutine("StartInteractionSequence");
+        StartCoroutine("StartInteractionSequence", action);
+
+        CurrentProgress = 0;
+
+        if (ProgressStarted != null)
+            ProgressStarted();
     }
 
-    private IEnumerator StartInteractionSequence()
+    private IEnumerator StartInteractionSequence(InputAction action)
     {
         float time = 0;
 
         while (time <= timeToComplete)
         {
             time += Time.deltaTime;
+            CurrentProgress = Mathf.Min(1, time / timeToComplete);
             yield return null;
         }
+
+        action.canceled -= Action_Canceled;
 
         if (ProgressComplete != null)
             ProgressComplete();
@@ -40,5 +66,10 @@ public class HoldInteractable : MonoBehaviour, IInteractable
             action.canceled -= Action_Canceled;
 
         StopCoroutine("StartInteractionSequence");
+
+        CurrentProgress = 0;
+
+        if (ProgressCanceled != null)
+            ProgressCanceled();
     }
 }
