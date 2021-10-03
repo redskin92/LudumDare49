@@ -4,6 +4,7 @@ using UnityEngine;
 public class PhonesTask : UrgentTaskBase
 {
     public float timeBeforeFail = 10f;
+    public GameObject lightObj;
 
     private ProgressMeter progressMeter;
 
@@ -18,6 +19,7 @@ public class PhonesTask : UrgentTaskBase
         base.ActivateTask();
 
         audioSource.Play();
+        lightObj.SetActive(true);
 
         holdInteractable.Interactable = true;
 
@@ -29,6 +31,7 @@ public class PhonesTask : UrgentTaskBase
         CancelInvoke("Fail");
 
         audioSource.Stop();
+        lightObj.SetActive(false);
 
         holdInteractable.Interactable = false;
     }
