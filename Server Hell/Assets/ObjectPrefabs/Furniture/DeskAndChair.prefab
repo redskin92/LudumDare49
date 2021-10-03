@@ -56,6 +56,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 4140e478ac507c5488d71de7d761444a, type: 3}
   - {fileID: 2800000, guid: bb4e742617e4dba46ab4fc63f07870bb, type: 3}
   - {fileID: 2800000, guid: 0b147587c1363d2429ac84faff740f75, type: 3}
+  - {fileID: 2800000, guid: caa5d47c934fa7548b7245364c192ebc, type: 3}
   emailTexture: {fileID: 2800000, guid: 8dbf7be518bbb354097abc57d0909592, type: 3}
 --- !u!65 &6645543739054224028
 BoxCollider:

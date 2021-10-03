@@ -16,8 +16,6 @@ public class EmailsTask : TaskBase
 
     private bool interactionStarted;
 
-	System.Random random = new System.Random();
-
 	private void Awake()
 	{
 		computerHold.Interactable = false;
@@ -95,7 +93,7 @@ public class EmailsTask : TaskBase
     private void UpdateTexture(bool active)
 	{
 		ToggleMonitor(true);
-		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTextures[random.Next(backgroundTextures.Count)]);
+		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTextures[Random.Range(0, backgroundTextures.Count)]);
 	}
 
 	private void ToggleMonitor(bool enable)
