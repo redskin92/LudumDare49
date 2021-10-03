@@ -25,6 +25,10 @@ public class SoundVolumeController : MonoBehaviour
 
     private static SoundVolumeController instance = null;
 
+    protected AdjustedAudioSource currentMusic = null;
+
+    protected float lastMusicVolume;
+
     // Sound Volume Controller Singleton
     public static SoundVolumeController Instance
     {
@@ -37,6 +41,18 @@ public class SoundVolumeController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+
+        lastMusicVolume = musicScale;
+    }
+
+    private void FixedUpdate()
+    {
+        if(lastMusicVolume != musicScale)
+        {
+            lastMusicVolume = musicScale;
+
+            AdjustMusic();
+        }
     }
 
     public void PlaySound(AdjustedAudioSource sound)
@@ -46,10 +62,25 @@ public class SoundVolumeController : MonoBehaviour
         sound.source.Play();
     }
 
+    public void AdjustMusic()
+    {
+        if (currentMusic)
+        {
+            currentMusic.source.volume = currentMusic.originalVolume * musicScale;
+        }
+    }
+
     public void PlayMusic(AdjustedAudioSource sound)
     {
+        if(currentMusic)
+        {
+            currentMusic.Stop();
+        }
+
         sound.source.volume = sound.originalVolume * musicScale;
 
         sound.source.Play();
+
+        currentMusic = sound;
     }
 }
