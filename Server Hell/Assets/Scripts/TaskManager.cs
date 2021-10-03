@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,11 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     private float minUrgentSpawnTime, maxUrgentSpawnTime, initialUrgentSpawnTime;
 
-    private List<TaskBase> routineTasks = new List<TaskBase>();
-    private List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
+    [Tooltip("Dynamically filled.  Don't assign manually.")]
+    public List<TaskBase> routineTasks = new List<TaskBase>();
+
+    [Tooltip("Dynamically filled.  Don't assign manually.")]
+    public List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
     private List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
     private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
@@ -26,6 +30,8 @@ public class TaskManager : MonoBehaviour
     private int tasksToComplete;
 
     private string prevTask = string.Empty;
+
+    public event Action TasksCompleted;
 
     private void Start()
     {
@@ -74,7 +80,7 @@ public class TaskManager : MonoBehaviour
         if (urgentTasks.Count == 0)
             return;
 
-        float t = Random.Range(minUrgentSpawnTime, maxUrgentSpawnTime);
+        float t = UnityEngine.Random.Range(minUrgentSpawnTime, maxUrgentSpawnTime);
 
         Invoke("ActivateRandomUrgent", t);
     }
@@ -115,7 +121,7 @@ public class TaskManager : MonoBehaviour
                     ActivateNewUrgentTask(availableUrgents[0]);
                     break;
                 default:
-                    var task = availableUrgents[Random.Range(0, count)];
+                    var task = availableUrgents[UnityEngine.Random.Range(0, count)];
 
                     ActivateNewUrgentTask(task);
                     break;
@@ -128,8 +134,12 @@ public class TaskManager : MonoBehaviour
     private void Win()
     {
         UnregisterTaskEvents();
+        CancelInvoke("ActivateRandomUrgent");
 
-        Debug.Log("You won!");
+        Debug.Log("All tasks completed!");
+
+        if (TasksCompleted != null)
+            TasksCompleted();
     }
 
     private bool CheckWinCondition()

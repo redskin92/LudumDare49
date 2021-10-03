@@ -28,8 +28,8 @@ public class StabilityMeter : MonoBehaviour
 
             if (stability == MinStability)
             {
-                if (MaxStabilityReached != null)
-                    MaxStabilityReached();
+                if (MinStabilityReached != null)
+                    MinStabilityReached();
             }
 
             if (StabilityUpdated != null)
@@ -50,7 +50,7 @@ public class StabilityMeter : MonoBehaviour
     }
 
     public event Action StabilityUpdated;
-    public event Action MaxStabilityReached;
+    public event Action MinStabilityReached;
 
     public void StabilityIncrease(int increase)
     {
