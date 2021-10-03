@@ -90,7 +90,8 @@ public class ButtonAdjustVolume : MenuButtons
             {
                 SoundVolumeController.Instance.effectsScale = volume;
 
-                PlayPressedSound();
+                if(!buttonSelectedSound.source.isPlaying)
+                    PlayPressedSound();
             }
         }
 
