@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Fire Outbreak
-  stabilityGainOnSuccess: 0
+  stabilityGainOnSuccess: 10
   stabilityLossOnFail: 10
   firePefab: {fileID: 1574230614363062971, guid: a24b4ce5a09402348a32dd27d510bb92,
     type: 3}
