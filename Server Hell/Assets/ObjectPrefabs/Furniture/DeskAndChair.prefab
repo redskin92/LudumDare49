@@ -223,6 +223,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: computerScreen
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ebc92a2739d2886499e5bc97d3e86847,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc92a2739d2886499e5bc97d3e86847, type: 3}
 --- !u!1 &3354354625196751111 stripped
