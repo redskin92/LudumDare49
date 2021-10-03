@@ -7,7 +7,7 @@ using UnityEngine;
 /// Example of how to use:
 /*  if (SoundVolumeController.Instance)
     {
-        SoundVolumeController.Instance.PlayMusic(this);
+        SoundVolumeController.Instance.PlaySound(this);
     }
     else
     {
@@ -70,6 +70,18 @@ public class SoundVolumeController : MonoBehaviour
         {
             currentMusic.source.volume = currentMusic.originalVolume * musicScale;
         }
+    }
+
+    public void SetMusic(AdjustedAudioSource sound)
+    {
+        if (currentMusic)
+        {
+            currentMusic.Stop();
+        }
+
+        sound.source.volume = sound.originalVolume * musicScale;
+
+        currentMusic = sound;
     }
 
     public void PlayMusic(AdjustedAudioSource sound)

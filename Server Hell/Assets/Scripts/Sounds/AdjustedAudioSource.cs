@@ -33,11 +33,7 @@ public class AdjustedAudioSource : MonoBehaviour
         {
             if (SoundVolumeController.Instance)
             {
-                SoundVolumeController.Instance.PlayMusic(this);
-            }
-            else
-            {
-                source.Play();
+                SoundVolumeController.Instance.SetMusic(this);
             }
         }
     }

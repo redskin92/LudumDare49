@@ -479,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ec31eba1878058488c543975d32fda4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionMenuController: {fileID: 0}
+  optionMenuController: {fileID: 1692613876}
   effectsScale: 1
   musicScale: 0.5
 --- !u!4 &762422876
@@ -525,7 +525,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fbb5537a95d33264990f749f6a6db428, type: 3}
-  m_PlayOnAwake: 0
+  m_PlayOnAwake: 1
   m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
@@ -651,6 +651,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuSound
       objectReference: {fileID: 0}
+    - target: {fileID: 4653483788364862915, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: controlsScemeBase
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4653483788578464028, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
         type: 3}
       propertyPath: m_RootOrder
@@ -714,10 +719,42 @@ PrefabInstance:
     - target: {fileID: 4653483788578464029, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653483789131869083, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653483789131869083, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653483789131869083, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4653483789131869090, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 083fe5abd1bd4df40a0cd3d8f66221a1, type: 3}
+--- !u!114 &1692613876 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4653483788364862915, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1692613875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a13c5bc5d30c8a5409edd038469e4fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1837216078
 GameObject:
   m_ObjectHideFlags: 0

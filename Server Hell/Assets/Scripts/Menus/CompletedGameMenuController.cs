@@ -33,18 +33,25 @@ public class CompletedGameMenuController : MenuButtonController
     [SerializeField]
     protected GameObject wonTitleObject;
 
+    [SerializeField]
+    protected AdjustedAudioSource loseGameMusic;
+
+    [SerializeField]
+    protected AdjustedAudioSource winGameMusic;
+
     public Color completeColor = Color.green;
 
     public Color notCompleteColor = Color.red;
 
-    public InputAction testIncreaseStability;
+    #if UNITY_EDITOR
 
-    public InputAction testDecreaseStability;
+        public InputAction testIncreaseStability;
 
-    public int stabilityIncrement = 10;
+        public InputAction testDecreaseStability;
 
+        public int stabilityIncrement = 10;
 
-
+    #endif
 
     protected override void Awake()
     {
@@ -71,22 +78,30 @@ public class CompletedGameMenuController : MenuButtonController
     {
         EnableButtons();
 
-        testIncreaseStability.Enable();
-        testDecreaseStability.Enable();
+        #if UNITY_EDITOR
 
-        testIncreaseStability.canceled += IncreaseStability;
-        testDecreaseStability.canceled += DecreaseStability;
+            testIncreaseStability.Enable();
+            testDecreaseStability.Enable();
+
+            testIncreaseStability.canceled += IncreaseStability;
+            testDecreaseStability.canceled += DecreaseStability;
+
+        #endif
     }
 
-    protected override void OnDisable()
+protected override void OnDisable()
     {
         base.OnDisable();
 
-        testIncreaseStability.canceled -= IncreaseStability;
-        testDecreaseStability.canceled -= DecreaseStability;
+        #if UNITY_EDITOR
 
-        testIncreaseStability.Disable();
-        testDecreaseStability.Disable();
+            testIncreaseStability.canceled -= IncreaseStability;
+            testDecreaseStability.canceled -= DecreaseStability;
+
+            testIncreaseStability.Disable();
+            testDecreaseStability.Disable();
+
+        #endif
     }
 
     public void WonGame()
@@ -103,6 +118,15 @@ public class CompletedGameMenuController : MenuButtonController
         completedGameMenuBase.SetActive(true);
 
         RegisterButtons();
+
+        if (SoundVolumeController.Instance)
+        {
+            SoundVolumeController.Instance.PlayMusic(winGameMusic);
+        }
+        else
+        {
+            winGameMusic.Play();
+        }
     }
 
     public void LostGame()
@@ -119,6 +143,15 @@ public class CompletedGameMenuController : MenuButtonController
         completedGameMenuBase.SetActive(true);
 
         RegisterButtons();
+
+        if (SoundVolumeController.Instance)
+        {
+            SoundVolumeController.Instance.PlayMusic(loseGameMusic);
+        }
+        else
+        {
+            loseGameMusic.Play();
+        }
     }
 
     public void IncreaseStability(InputAction.CallbackContext obj)
