@@ -7,8 +7,9 @@ public class TaskManager : MonoBehaviour
 {
     public RectTransform routineTasksDisplayParent, urgentTasksDisplayParent;
     public GameObject taskNameDisplayPrefab;
-    public List<TaskBase> routineTasks;
-    public List<UrgentTaskBase> urgentTasks;
+
+    private List<TaskBase> routineTasks = new List<TaskBase>();
+    private List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
     [SerializeField]
     private float minUrgentSpawnTime, maxUrgentSpawnTime;
@@ -21,6 +22,8 @@ public class TaskManager : MonoBehaviour
 
     private void Start()
     {
+        FindAndAssignTasks();
+
         tasksToComplete = routineTasks.Count;
 
         foreach (var task in routineTasks)
@@ -38,6 +41,23 @@ public class TaskManager : MonoBehaviour
         }
 
         SpawnRandomUrgentAfterDelay();
+    }
+
+    private void FindAndAssignTasks()
+    {
+        routineTasks = new List<TaskBase>();
+        urgentTasks = new List<UrgentTaskBase>();
+
+        var tasks = FindObjectsOfType<TaskBase>();
+
+        foreach(var task in tasks)
+        {
+            var u = task as UrgentTaskBase;
+            if (u != null)
+                urgentTasks.Add(u);
+            else
+                routineTasks.Add(task);
+        }
     }
 
     private void SpawnRandomUrgentAfterDelay()
