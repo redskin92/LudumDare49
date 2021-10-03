@@ -38,17 +38,10 @@ public class DeliveryTask : TaskBase
     private Transform current_SpawnLocation;
     private Transform current_Destination;
 
-    private Random rand;
+    private Random rand = new Random();
     private GameObject parcel;
     private GameObject landing;
 
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        rand = new Random();   
-    }
     
     public override void ActivateTask()
     {
@@ -103,7 +96,7 @@ public class DeliveryTask : TaskBase
         Destroy(landing);
         FireTaskComplete();
         
-        
+   
     }
     
 }
