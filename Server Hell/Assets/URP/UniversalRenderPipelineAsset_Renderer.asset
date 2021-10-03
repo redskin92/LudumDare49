@@ -28,8 +28,7 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -7020548502297233293}
   - {fileID: 2957068912218666312}
-  - {fileID: 6894726583680984915}
-  m_RendererFeatureMap: 73382c685500929e48f52429829e09295367bf4b4cfdae5f
+  m_RendererFeatureMap: 73382c685500929e48f52429829e0929
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
   shaders:
@@ -72,16 +71,3 @@ MonoBehaviour:
   m_Name: Dithering
   m_EditorClassIdentifier: 
   m_Active: 1
---- !u!114 &6894726583680984915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3277e3c6431244fb960cbd72870858e2, type: 3}
-  m_Name: Fog
-  m_EditorClassIdentifier: 
-  m_Active: 0
