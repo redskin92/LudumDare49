@@ -6,6 +6,7 @@ using UnityEngine;
 public class Trashbag : EquipInteractable
 {
 	public event Action<Trashbag> TrashThrownAway;
+	public AudioSource completedSound;
 
 	bool processed = false;
 
@@ -19,6 +20,7 @@ public class Trashbag : EquipInteractable
 				TrashThrownAway(this);
 
 			processed = true;
+			completedSound.Play();
 		}
 	}
 }
