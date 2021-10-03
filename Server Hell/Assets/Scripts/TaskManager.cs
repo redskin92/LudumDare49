@@ -23,7 +23,7 @@ public class TaskManager : MonoBehaviour
     [Tooltip("Dynamically filled.  Don't assign manually.")]
     public List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
-    private List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
+    public List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
     private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
 
     private int completedTasks;
@@ -259,7 +259,7 @@ public class TaskManager : MonoBehaviour
 		group.UpdateText();
 	}
 
-	private class TaskLabelCount
+	public class TaskLabelCount
     {
         private const string TASK_FORMAT = "- {0}{1}";
 
