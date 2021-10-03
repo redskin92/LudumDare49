@@ -69,14 +69,18 @@ public class TaskManager : MonoBehaviour
                 break;
             case 1:
                 availableUrgents[0].ActivateTask();
+                activeUrgentTasks.Add(availableUrgents[0]);
                 break;
             default:
                 var task = availableUrgents[Random.Range(0, count)];
 
                 task.ActivateTask();
                 activeUrgentTasks.Add(task);
+
                 break;
         }
+
+        SpawnRandomUrgentAfterDelay();
     }
 
     private void Win()

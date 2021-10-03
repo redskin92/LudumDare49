@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(HoldInteractable))]
-public class PhonesTask : UrgentTaskBase
+public class LeakTask : UrgentTaskBase
 {
     public Image image;
     public float timeBeforeFail = 10f;
@@ -10,16 +10,15 @@ public class PhonesTask : UrgentTaskBase
     private HoldInteractable holdInteractable;
     private bool interactionStarted;
 
-    private AudioSource audioSource;
+    private ParticleSystem waterSprayParticles;
 
     public override void ActivateTask()
     {
-        Debug.Log("Phones task activated!");
+        Debug.Log("Leak task activated!");
         base.ActivateTask();
 
-        audioSource.Play();
-
         holdInteractable.Interactable = true;
+        waterSprayParticles.Play();
 
         InvokeRepeating("Fail", timeBeforeFail, timeBeforeFail);
     }
@@ -27,16 +26,14 @@ public class PhonesTask : UrgentTaskBase
     public void DeactivateTask()
     {
         CancelInvoke("Fail");
-
-        audioSource.Stop();
-
         holdInteractable.Interactable = false;
+        waterSprayParticles.Stop();
     }
 
     private void Awake()
     {
         holdInteractable = GetComponent<HoldInteractable>();
-        audioSource = GetComponent<AudioSource>();
+        waterSprayParticles = GetComponentInChildren<ParticleSystem>();
     }
 
     private void Start()
