@@ -48,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5, y: 0.2958142, z: 0.41929364}
-  m_Center: {x: 0, y: 0.14209293, z: -0.039646827}
+  m_Size: {x: 0.75, y: 0.44916996, z: 0.75}
+  m_Center: {x: 0, y: 0.21877082, z: -0.039646834}
 --- !u!54 &4836270973908026794
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -95,7 +95,6 @@ MonoBehaviour:
   taskName: Answer Phones
   stabilityGainOnSuccess: 10
   stabilityLossOnFail: 3
-  image: {fileID: 0}
   timeBeforeFail: 10
 --- !u!82 &3574378877903504062
 AudioSource:

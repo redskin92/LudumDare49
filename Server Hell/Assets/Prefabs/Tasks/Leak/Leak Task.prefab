@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 875433779502934091}
   m_LocalRotation: {x: -0.4969458, y: 0.5030356, z: 0.5030356, w: 0.49694604}
-  m_LocalPosition: {x: 0, y: 0.472, z: 0}
+  m_LocalPosition: {x: 0.01, y: 0.472, z: 0.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7121542860780741770}
@@ -168,7 +168,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -4850,8 +4850,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 2, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Size: {x: 2, y: 1.8583269, z: 1.8460667}
+  m_Center: {x: 2.0558315e-16, y: 1.3208365, z: 0.07696661}
 --- !u!54 &7121542860780741764
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4897,5 +4897,4 @@ MonoBehaviour:
   taskName: Fix Leak
   stabilityGainOnSuccess: 10
   stabilityLossOnFail: 10
-  image: {fileID: 0}
   timeBeforeFail: 10
