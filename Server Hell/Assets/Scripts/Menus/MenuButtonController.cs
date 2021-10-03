@@ -13,6 +13,9 @@ public class MenuButtonController : MonoBehaviour
     [SerializeField]
     protected List<MenuButtons> menuButtons;
 
+    [SerializeField]
+    protected GameObject controlsScemeBase;
+
     public InputAction navigateUp;
 
     public InputAction navigateDown;
@@ -54,6 +57,11 @@ public class MenuButtonController : MonoBehaviour
         navigateUp.canceled += Navigate_Up;
         navigateDown.canceled += Navigate_Down;
 
+        if (controlsScemeBase)
+        {
+            controlsScemeBase.SetActive(true);
+        }
+
         DelayButtonPressed();
     }
 
@@ -62,6 +70,11 @@ public class MenuButtonController : MonoBehaviour
         navigateUp.canceled -= Navigate_Up;
         navigateDown.canceled -= Navigate_Down;
         buttonActivate.canceled -= Select_Button;
+
+        if (controlsScemeBase)
+        {
+            controlsScemeBase.SetActive(false);
+        }
     }
 
     public virtual void DisableButtons()
@@ -73,6 +86,9 @@ public class MenuButtonController : MonoBehaviour
         navigateUp.Disable();
         navigateDown.Disable();
         buttonActivate.Disable();
+
+
+
     }
 
     private void Navigate_Up(InputAction.CallbackContext obj)

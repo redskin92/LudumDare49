@@ -27,7 +27,7 @@ public class MenuButtons : MonoBehaviour
     /// <summary>
     /// Turn the text green to signify selected.
     /// </summary>
-    public void Selected(bool playSound = true)
+    public virtual void Selected(bool playSound = true)
     {
         buttonText.color = Color.green;
     }
@@ -35,7 +35,7 @@ public class MenuButtons : MonoBehaviour
     /// <summary>
     /// Turn the text red to signify not selected.
     /// </summary>
-    public void NotSelected()
+    public virtual void NotSelected()
     {
         buttonText.color = Color.red;
     }

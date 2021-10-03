@@ -14,6 +14,9 @@ public class ButtonAdjustVolume : MenuButtons
     [SerializeField]
     protected bool isMusic = false;
 
+    [SerializeField]
+    protected GameObject controlsScemeParent;
+
     protected float volume = 1.0f;
 
     private void Awake()
@@ -59,6 +62,20 @@ public class ButtonAdjustVolume : MenuButtons
         {
             SetVolume();
         }
+    }
+
+    public override void Selected(bool playSound = true)
+    {
+        base.Selected(playSound);
+
+        controlsScemeParent.SetActive(true);
+    }
+
+    public override void NotSelected()
+    {
+        base.NotSelected();
+
+        controlsScemeParent.SetActive(false);
     }
 
     protected void SetVolume()
