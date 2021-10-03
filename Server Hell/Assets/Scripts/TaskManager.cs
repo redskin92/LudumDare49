@@ -8,11 +8,16 @@ public class TaskManager : MonoBehaviour
     public RectTransform routineTasksDisplayParent, urgentTasksDisplayParent;
     public GameObject taskNameDisplayPrefab;
 
-    private List<TaskBase> routineTasks = new List<TaskBase>();
-    private List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
+    /// <summary>
+    /// The point at which we should stop spawning urgent tasks.
+    /// </summary>
+    public int stabilityThreshold;
 
     [SerializeField]
     private float minUrgentSpawnTime, maxUrgentSpawnTime, initialUrgentSpawnTime;
+
+    private List<TaskBase> routineTasks = new List<TaskBase>();
+    private List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
     private List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
     private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
@@ -86,26 +91,29 @@ public class TaskManager : MonoBehaviour
 
     private void ActivateRandomUrgent()
     {
-        List<UrgentTaskBase> availableUrgents;
-        int count = urgentTasks.Count(x => !x.IsActive && x.taskName != prevTask);
-        if (count > 0)
-            availableUrgents = urgentTasks.Where(x => !x.IsActive && x.taskName != prevTask).ToList();
-        else
-            availableUrgents = urgentTasks.Where(x => !x.IsActive).ToList();
-
-        switch (count)
+        if (StabilityMeter.Instance != null && StabilityMeter.Instance.Stability > stabilityThreshold)
         {
-            case 0:
-                Debug.Log("No urgent tasks available!");
-                break;
-            case 1:
-                ActivateNewUrgentTask(availableUrgents[0]);
-                break;
-            default:
-                var task = availableUrgents[Random.Range(0, count)];
+            List<UrgentTaskBase> availableUrgents;
+            int count = urgentTasks.Count(x => !x.IsActive && x.taskName != prevTask);
+            if (count > 0)
+                availableUrgents = urgentTasks.Where(x => !x.IsActive && x.taskName != prevTask).ToList();
+            else
+                availableUrgents = urgentTasks.Where(x => !x.IsActive).ToList();
 
-                ActivateNewUrgentTask(task);
-                break;
+            switch (count)
+            {
+                case 0:
+                    Debug.Log("No urgent tasks available!");
+                    break;
+                case 1:
+                    ActivateNewUrgentTask(availableUrgents[0]);
+                    break;
+                default:
+                    var task = availableUrgents[Random.Range(0, count)];
+
+                    ActivateNewUrgentTask(task);
+                    break;
+            }
         }
 
         SpawnRandomUrgentAfterDelay();
@@ -180,6 +188,9 @@ public class TaskManager : MonoBehaviour
         completedTasks++;
         Debug.Log($"{task.taskName} completed! {completedTasks} out of {tasksToComplete} have been completed.");
 
+        if (StabilityMeter.Instance != null)
+            StabilityMeter.Instance.StabilityIncrease(task.stabilityGainOnSuccess);
+
         if (CheckWinCondition())
             Win();
     }
@@ -199,6 +210,11 @@ public class TaskManager : MonoBehaviour
             }
         }
 
+        Debug.Log($"{task.taskName} completed!");
+
+        if (StabilityMeter.Instance != null)
+            StabilityMeter.Instance.StabilityIncrease(task.stabilityGainOnSuccess);
+
         if (CheckWinCondition())
             Win();
     }
@@ -206,6 +222,9 @@ public class TaskManager : MonoBehaviour
     private void UrgentTask_TaskFailed(UrgentTaskBase task)
     {
         Debug.Log($"{task.taskName} failed!");
+
+        if (StabilityMeter.Instance != null)
+            StabilityMeter.Instance.StabilityDecrease(task.stabilityLossOnFail);
     }
 
     private class TaskLabelCount
