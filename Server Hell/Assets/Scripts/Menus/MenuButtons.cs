@@ -14,6 +14,9 @@ public class MenuButtons : MonoBehaviour
     [SerializeField]
     protected Text buttonText;
 
+    [SerializeField]
+    protected AdjustedAudioSource buttonSelectedSound;
+
     /// <summary>
     /// Do the action.
     /// </summary>
@@ -27,8 +30,6 @@ public class MenuButtons : MonoBehaviour
     /// </summary>
     public void Selected(bool playSound = true)
     {
-        //TODO use Sound Manager to play sound
-        //buttonSelected.Play();
         buttonText.color = Color.green;
     }
 
@@ -42,7 +43,16 @@ public class MenuButtons : MonoBehaviour
 
     public void PlayPressedSound()
     {
-        //TODO use Sound Manager to play sound
-        //buttonPressed.Play();
+        if (buttonSelectedSound)
+        {
+            if (SoundVolumeController.Instance)
+            {
+                SoundVolumeController.Instance.PlayMusic(buttonSelectedSound);
+            }
+            else
+            {
+                buttonSelectedSound.Play();
+            }
+        }
     }
 }

@@ -19,6 +19,8 @@ public class MenuButtonController : MonoBehaviour
 
     public InputAction buttonActivate;
 
+    public AdjustedAudioSource navigateButtonSound;
+
     protected int buttonIndex = 0;
 
     protected float updateButtonsBuffer = 0.2f;
@@ -74,6 +76,8 @@ public class MenuButtonController : MonoBehaviour
         currentButtonsBuffer = updateButtonsBuffer;
 
         UpdateSelectedButton();
+
+        PlayButtonSound();
     }
 
     private void Navigate_Down(InputAction.CallbackContext obj)
@@ -88,6 +92,8 @@ public class MenuButtonController : MonoBehaviour
         currentButtonsBuffer = updateButtonsBuffer;
 
         UpdateSelectedButton();
+
+        PlayButtonSound();
     }
 
     private void Select_Button(InputAction.CallbackContext obj)
@@ -114,6 +120,18 @@ public class MenuButtonController : MonoBehaviour
             {
                 menuButtons[i].NotSelected();
             }
+        }
+    }
+
+    protected void PlayButtonSound()
+    {
+        if (SoundVolumeController.Instance)
+        {
+            SoundVolumeController.Instance.PlaySound(navigateButtonSound);
+        }
+        else
+        {
+            navigateButtonSound.Play();
         }
     }
 }
