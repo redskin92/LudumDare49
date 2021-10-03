@@ -238,7 +238,7 @@ public class TaskManager : MonoBehaviour
 		var group = routineTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
 		if (group == null) return;
 
-		group.textMesh.text = task.name;
+		group.UpdateText();
 	}
 
 	private void Urgent_TaskNameUpdate(TaskBase task)
@@ -246,7 +246,7 @@ public class TaskManager : MonoBehaviour
 		var group = urgentTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
 		if (group == null) return;
 
-		group.textMesh.text = task.name;
+		group.UpdateText();
 	}
 
 	private class TaskLabelCount
@@ -271,9 +271,14 @@ public class TaskManager : MonoBehaviour
             if (count < 0)
                 count = 0;
 
-            string countSuffix = count <= 1 ? "" : " (" + count + ")";
+			UpdateText();
+		}
 
-            textMesh.text = string.Format(TASK_FORMAT, task.taskName, countSuffix);
-        }
+		public void UpdateText()
+		{
+			string countSuffix = count <= 1 ? "" : " (" + count + ")";
+
+			textMesh.text = string.Format(TASK_FORMAT, task.taskName, countSuffix);
+		}
     }
 }

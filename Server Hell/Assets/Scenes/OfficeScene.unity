@@ -41164,7 +41164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566f1e4590d8c8e4ab734a54ae17819b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskName: Take out the trash
+  taskName: Throw away trash
   stabilityGainOnSuccess: 10
   trashBags:
   - {fileID: 1140160828772769685}

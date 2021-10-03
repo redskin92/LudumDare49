@@ -26,10 +26,11 @@ public class TrashTask : TaskBase
 	{
 		bag.TrashThrownAway -= TrashProcessed;
 
-		UpdateTaskName("Take out trash (" + (startingbagamount - trashBags.Count) + " / " + startingbagamount + ")");
-
 		if(trashBags.Contains(bag))
 			trashBags.Remove(bag);
+
+		UpdateTaskName("Throw away trash (" + (startingbagamount - trashBags.Count) + " / " + startingbagamount + ")");
+
 
 		Destroy(bag.gameObject);
 		completedSound.Play();
