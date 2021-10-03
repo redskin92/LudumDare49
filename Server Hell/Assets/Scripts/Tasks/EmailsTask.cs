@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EmailsTask : TaskBase
@@ -6,7 +7,7 @@ public class EmailsTask : TaskBase
 	[SerializeField] private Material screenMaterial;
 
 	[SerializeField]
-	private Texture2D backgroundTexture;
+	private List<Texture2D> backgroundTextures;
 	[SerializeField]
 	private Texture2D emailTexture;
 
@@ -14,6 +15,8 @@ public class EmailsTask : TaskBase
     private MeshRenderer meshRenderer;
 
     private bool interactionStarted;
+
+	System.Random random = new System.Random();
 
 	private void Awake()
 	{
@@ -92,7 +95,7 @@ public class EmailsTask : TaskBase
     private void UpdateTexture(bool active)
 	{
 		ToggleMonitor(true);
-		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTexture);
+		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTextures[random.Next(backgroundTextures.Count)]);
 	}
 
 	private void ToggleMonitor(bool enable)
