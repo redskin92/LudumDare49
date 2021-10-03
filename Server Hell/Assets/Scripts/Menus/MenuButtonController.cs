@@ -86,9 +86,6 @@ public class MenuButtonController : MonoBehaviour
         navigateUp.Disable();
         navigateDown.Disable();
         buttonActivate.Disable();
-
-
-
     }
 
     private void Navigate_Up(InputAction.CallbackContext obj)
