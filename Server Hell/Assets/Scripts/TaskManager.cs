@@ -192,7 +192,7 @@ public class TaskManager : MonoBehaviour
     {
         task.TaskComplete -= RoutineTask_TaskComplete;
 
-        var fromList = routineTaskGroup.FirstOrDefault(x => x.task == task);
+        var fromList = routineTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
         if (fromList != null)
         {
             fromList.SetCount(fromList.count - 1);
