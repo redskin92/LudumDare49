@@ -1,16 +1,20 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TaskManager : MonoBehaviour
 {
+    public RectTransform routineTasksDisplayParent, urgentTasksDisplayParent;
+    public GameObject taskNameDisplayPrefab;
     public List<TaskBase> routineTasks;
     public List<UrgentTaskBase> urgentTasks;
 
     [SerializeField]
     private float minUrgentSpawnTime, maxUrgentSpawnTime;
 
-    private List<UrgentTaskBase> activeUrgentTasks = new List<UrgentTaskBase>();
+    private List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
+    private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
 
     private int completedTasks;
     private int tasksToComplete;
@@ -23,6 +27,8 @@ public class TaskManager : MonoBehaviour
         {
             task.TaskComplete += RoutineTask_TaskComplete;
             task.ActivateTask();
+
+            SpawnTaskDisplayUI(routineTasksDisplayParent, task);
         }
 
         foreach (var task in urgentTasks)
@@ -68,15 +74,12 @@ public class TaskManager : MonoBehaviour
                 Debug.Log("No urgent tasks available!");
                 break;
             case 1:
-                availableUrgents[0].ActivateTask();
-                activeUrgentTasks.Add(availableUrgents[0]);
+                ActivateNewUrgentTask(availableUrgents[0]);
                 break;
             default:
                 var task = availableUrgents[Random.Range(0, count)];
 
-                task.ActivateTask();
-                activeUrgentTasks.Add(task);
-
+                ActivateNewUrgentTask(task);
                 break;
         }
 
@@ -92,12 +95,61 @@ public class TaskManager : MonoBehaviour
 
     private bool CheckWinCondition()
     {
-        return completedTasks == tasksToComplete && activeUrgentTasks.Count == 0;
+        return completedTasks == tasksToComplete && urgentTaskGroup.Count(x => x.task.IsActive) == 0;
+    }
+
+    private void ActivateNewUrgentTask(UrgentTaskBase task)
+    {
+        task.ActivateTask();
+        SpawnTaskDisplayUI(urgentTasksDisplayParent, task);
+    }
+
+    private void SpawnTaskDisplayUI(RectTransform parent, TaskBase task)
+    {
+        var group = routineTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
+        if (group == null)
+        {
+            var taskDisplay = Instantiate(taskNameDisplayPrefab, parent).GetComponent<TextMeshProUGUI>();
+            taskDisplay.text = "- " + task.taskName;
+
+            group = new TaskLabelCount(task, taskDisplay, 0);
+            routineTaskGroup.Add(group);
+        }
+        else
+            group.textMesh.gameObject.SetActive(true);
+
+        group.count++;
+    }
+
+    private void SpawnTaskDisplayUI(RectTransform parent, UrgentTaskBase task)
+    {
+        var group = urgentTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
+        if (group == null)
+        {
+            var taskDisplay = Instantiate(taskNameDisplayPrefab, parent).GetComponent<TextMeshProUGUI>();
+            taskDisplay.text = "- " + task.taskName;
+
+            group = new TaskLabelCount(task, taskDisplay, 0);
+            urgentTaskGroup.Add(group);
+        }
+        else
+            group.textMesh.gameObject.SetActive(true);
+
+        group.count++;
     }
 
     private void RoutineTask_TaskComplete(TaskBase task)
     {
         task.TaskComplete -= RoutineTask_TaskComplete;
+
+        var fromList = routineTaskGroup.FirstOrDefault(x => x.task == task);
+        if (fromList != null)
+        {
+            fromList.count--;
+
+            if (fromList.count == 0)
+                fromList.textMesh.gameObject.SetActive(false);
+        }
 
         completedTasks++;
         Debug.Log($"{task.taskName} completed! {completedTasks} out of {tasksToComplete} have been completed.");
@@ -108,13 +160,17 @@ public class TaskManager : MonoBehaviour
 
     private void UrgentTask_TaskComplete(TaskBase task)
     {
-        task.TaskComplete -= UrgentTask_TaskComplete;
-
         var urgent = task as UrgentTaskBase;
         if (urgent != null)
         {
-            if (activeUrgentTasks.Contains(urgent))
-                activeUrgentTasks.Remove(urgent);
+            var fromList = urgentTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
+            if (fromList != null)
+            {
+                fromList.count--;
+
+                if (fromList.count == 0)
+                    fromList.textMesh.gameObject.SetActive(false);
+            }
         }
 
         if (CheckWinCondition())
@@ -124,5 +180,19 @@ public class TaskManager : MonoBehaviour
     private void UrgentTask_TaskFailed(UrgentTaskBase task)
     {
         Debug.Log($"{task.taskName} failed!");
+    }
+
+    private class TaskLabelCount
+    {
+        public TaskBase task;
+        public TextMeshProUGUI textMesh;
+        public int count;
+
+        public TaskLabelCount(TaskBase t, TextMeshProUGUI tm, int c)
+        {
+            task = t;
+            textMesh = tm;
+            count = c;
+        }
     }
 }
