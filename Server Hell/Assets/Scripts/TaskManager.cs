@@ -110,7 +110,6 @@ public class TaskManager : MonoBehaviour
         if (group == null)
         {
             var taskDisplay = Instantiate(taskNameDisplayPrefab, parent).GetComponent<TextMeshProUGUI>();
-            taskDisplay.text = "- " + task.taskName;
 
             group = new TaskLabelCount(task, taskDisplay, 0);
             routineTaskGroup.Add(group);
@@ -118,7 +117,7 @@ public class TaskManager : MonoBehaviour
         else
             group.textMesh.gameObject.SetActive(true);
 
-        group.count++;
+        group.SetCount(group.count + 1);
     }
 
     private void SpawnTaskDisplayUI(RectTransform parent, UrgentTaskBase task)
@@ -127,7 +126,6 @@ public class TaskManager : MonoBehaviour
         if (group == null)
         {
             var taskDisplay = Instantiate(taskNameDisplayPrefab, parent).GetComponent<TextMeshProUGUI>();
-            taskDisplay.text = "- " + task.taskName;
 
             group = new TaskLabelCount(task, taskDisplay, 0);
             urgentTaskGroup.Add(group);
@@ -135,7 +133,8 @@ public class TaskManager : MonoBehaviour
         else
             group.textMesh.gameObject.SetActive(true);
 
-        group.count++;
+        group.SetCount(group.count + 1);
+
     }
 
     private void RoutineTask_TaskComplete(TaskBase task)
@@ -145,7 +144,7 @@ public class TaskManager : MonoBehaviour
         var fromList = routineTaskGroup.FirstOrDefault(x => x.task == task);
         if (fromList != null)
         {
-            fromList.count--;
+            fromList.SetCount(fromList.count - 1);
 
             if (fromList.count == 0)
                 fromList.textMesh.gameObject.SetActive(false);
@@ -166,7 +165,7 @@ public class TaskManager : MonoBehaviour
             var fromList = urgentTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
             if (fromList != null)
             {
-                fromList.count--;
+                fromList.SetCount(fromList.count - 1);
 
                 if (fromList.count == 0)
                     fromList.textMesh.gameObject.SetActive(false);
@@ -184,6 +183,8 @@ public class TaskManager : MonoBehaviour
 
     private class TaskLabelCount
     {
+        private const string TASK_FORMAT = "- {0}{1}";
+
         public TaskBase task;
         public TextMeshProUGUI textMesh;
         public int count;
@@ -192,7 +193,19 @@ public class TaskManager : MonoBehaviour
         {
             task = t;
             textMesh = tm;
+            SetCount(c);
+        }
+
+        public void SetCount(int c)
+        {
             count = c;
+
+            if (count < 0)
+                count = 0;
+
+            string countSuffix = count <= 1 ? "" : " (" + count + ")";
+
+            textMesh.text = string.Format(TASK_FORMAT, task.taskName, countSuffix);
         }
     }
 }
