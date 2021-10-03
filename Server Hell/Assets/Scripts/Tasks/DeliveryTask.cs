@@ -47,18 +47,13 @@ public class DeliveryTask : TaskBase
     // Start is called before the first frame update
     void Start()
     {
-        rand = new Random();
-      
-        
-        Spawn();
-        
+        rand = new Random();   
     }
     
     public override void ActivateTask()
     {
-       /*
         Spawn();
-        base.ActivateTask();*/
+        base.ActivateTask();
     }
 
     void Spawn()
