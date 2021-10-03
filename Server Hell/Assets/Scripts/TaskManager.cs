@@ -17,6 +17,9 @@ public class TaskManager : MonoBehaviour
     [SerializeField]
     private float minUrgentSpawnTime, maxUrgentSpawnTime, initialUrgentSpawnTime;
 
+    [SerializeField]
+    private int numEmailTasks = 3;
+
     [Tooltip("Dynamically filled.  Don't assign manually.")]
     public List<TaskBase> routineTasks = new List<TaskBase>();
 
@@ -64,6 +67,21 @@ public class TaskManager : MonoBehaviour
         urgentTasks = new List<UrgentTaskBase>();
 
         var tasks = FindObjectsOfType<TaskBase>();
+
+        // Limited e-mail tasks
+        var emailTasks = tasks.Where(x => x is EmailsTask).ToList();
+
+        tasks = tasks.Except(emailTasks).ToArray();
+
+        for (int i = 0; i < numEmailTasks; i++)
+        {
+            int index = UnityEngine.Random.Range(0, emailTasks.Count());
+
+            routineTasks.Add(emailTasks[index]);
+            emailTasks.RemoveAt(index);
+        }
+
+        emailTasks = null;
 
         foreach(var task in tasks)
         {
