@@ -73,7 +73,7 @@ public class FireOutbreakTask : UrgentTaskBase
 
 	private void CheckForTaskComplete()
 	{
-		if (activeFires.Count < 0)
+		if (activeFires.Count <= 0)
 			FireTaskComplete();
 	}
 }
