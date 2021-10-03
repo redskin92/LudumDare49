@@ -5,14 +5,30 @@ using UnityEngine;
 public class EmailsTask : TaskBase
 {
 	[SerializeField] private HoldInteractable computerHold;
-	[SerializeField] private Material defaultScreenMaterial;
-	[SerializeField] private Material taskActiveScreenMaterial;
+	[SerializeField] private Material screenMaterial;
 
+	[SerializeField]
+	private Texture2D backgroundTexture;
+	[SerializeField]
+	private Texture2D emailTexture;
+
+	private MeshRenderer meshRenderer;
 
 	private void Awake()
 	{
 		computerHold.Interactable = false;
-		UpdateMaterial(false);
+		meshRenderer = computerHold.GetComponent<MeshRenderer>();
+		var materials = meshRenderer.materials;
+		materials[1] = screenMaterial;
+		meshRenderer.materials = materials;
+		UpdateTexture(false);
+
+		float rng = Random.Range(0, 100f);
+		ToggleMonitor(rng > 50f);
+
+		rng = Random.Range(0, 100f);
+		if(rng > 50f)
+			UpdateTexture(false);
 	}
 
 	public override void ActivateTask()
@@ -22,7 +38,7 @@ public class EmailsTask : TaskBase
 		computerHold.Interactable = true;
 		computerHold.ProgressComplete += ComputerHold_ProgressComplete;
 
-		UpdateMaterial(true);
+		UpdateTexture(true);
 	}
 
 	private void ComputerHold_ProgressComplete()
@@ -31,16 +47,17 @@ public class EmailsTask : TaskBase
 		computerHold.Interactable = false;
 		FireTaskComplete();
 
-		UpdateMaterial(false);
+		UpdateTexture(false);
 	}
 
-	private void UpdateMaterial(bool active)
+	private void UpdateTexture(bool active)
 	{
-		var meshRenderer = computerHold.GetComponent<MeshRenderer>();
+		ToggleMonitor(true);
+		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTexture);
+	}
 
-		var materials = meshRenderer.materials;
-		materials[1] = active ? taskActiveScreenMaterial : defaultScreenMaterial;
-
-		meshRenderer.materials = materials; 
+	private void ToggleMonitor(bool enable)
+	{
+		meshRenderer.materials[1].SetFloat("_EmissionAmount", enable ? 1.0f : 0.0f);
 	}
 }

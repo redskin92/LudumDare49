@@ -6,7 +6,7 @@ public class AdjustedAudioSource : MonoBehaviour
 {
     public AudioSource source;
 
-    public bool playAtStart = false;
+    public bool isMusic = false;
 
     [HideInInspector]
     public float originalVolume;
@@ -29,7 +29,7 @@ public class AdjustedAudioSource : MonoBehaviour
 
         originalVolume = source.volume;
 
-        if(playAtStart)
+        if(isMusic)
         {
             if (SoundVolumeController.Instance)
             {
@@ -47,6 +47,14 @@ public class AdjustedAudioSource : MonoBehaviour
         if(source)
         {
             source.Play();
+        }
+    }
+
+    public void Stop()
+    {
+        if (source)
+        {
+            source.Stop();
         }
     }
 }

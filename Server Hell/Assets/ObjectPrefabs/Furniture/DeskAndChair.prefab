@@ -51,10 +51,9 @@ MonoBehaviour:
   taskName: Send Emails
   stabilityGainOnSuccess: 10
   computerHold: {fileID: 878504442652158358}
-  defaultScreenMaterial: {fileID: -8896051167825165466, guid: ebc92a2739d2886499e5bc97d3e86847,
-    type: 3}
-  taskActiveScreenMaterial: {fileID: -3026631972412005785, guid: 3fa81db304611864cbdb17449525ac73,
-    type: 3}
+  screenMaterial: {fileID: 2100000, guid: 27a9a43120daef14bb4bf657e76cab90, type: 2}
+  backgroundTexture: {fileID: 2800000, guid: 4140e478ac507c5488d71de7d761444a, type: 3}
+  emailTexture: {fileID: 2800000, guid: 8dbf7be518bbb354097abc57d0909592, type: 3}
 --- !u!65 &6645543739054224028
 BoxCollider:
   m_ObjectHideFlags: 0
