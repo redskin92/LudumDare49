@@ -7,6 +7,7 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 {
     public string interactionName;
     public float timeToComplete;
+    private PlayerInput playerInput;
 
     public string InteractionName => interactionName;
 
@@ -40,8 +41,16 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 
         CurrentProgress = 0;
 
+        playerInput.actions.Disable();
+
         if (ProgressStarted != null)
             ProgressStarted();
+    }
+
+    private void Awake()
+    {
+        var player = GameObject.FindGameObjectWithTag("Player");
+        playerInput = player.GetComponent<PlayerInput>();
     }
 
     private IEnumerator StartInteractionSequence(InputAction action)
@@ -57,6 +66,8 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 
         action.canceled -= Action_Canceled;
 
+        playerInput.actions.Enable();
+
         if (ProgressComplete != null)
             ProgressComplete();
     }
@@ -70,6 +81,8 @@ public class HoldInteractable : MonoBehaviour, IInteractable
         StopCoroutine("StartInteractionSequence");
 
         CurrentProgress = 0;
+
+        playerInput.actions.Enable();
 
         if (ProgressCanceled != null)
             ProgressCanceled();
