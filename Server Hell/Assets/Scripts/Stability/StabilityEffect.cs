@@ -36,7 +36,7 @@ public class StabilityEffect : MonoBehaviour
 
         active = true;
 
-        Debug.Log(string.Format("Stability Effect {0} has been enabled at {1} stability!"));
+        Debug.Log(string.Format("Stability Effect {0} has been enabled at {1} stability!", name, StabilityMeter.Instance.Stability));
     }
 
     protected virtual void UpdateEffect()
@@ -44,7 +44,7 @@ public class StabilityEffect : MonoBehaviour
         if (!active)
             return;
         
-        Debug.Log(string.Format("Stability Effect {0} has updated its effect at {1} stability!"));
+        Debug.Log(string.Format("Stability Effect {0} has updated its effect at {1} stability!", name, StabilityMeter.Instance.Stability));
     }
 
     protected virtual void DisableEffect()
@@ -54,7 +54,7 @@ public class StabilityEffect : MonoBehaviour
 
         active = false;
 
-        Debug.Log(string.Format("Stability Effect {0} has been disabled at {1} stability!"));
+        Debug.Log(string.Format("Stability Effect {0} has been disabled at {1} stability!", name, StabilityMeter.Instance.Stability));
     }
 
     protected void Register()
