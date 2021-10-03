@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class EquipInteractable : MonoBehaviour, IInteractable
 {
 	public string interactionName = "Press 'E' to Equip";
-	public virtual string useActionName => "Left Click to use";
+	public virtual string useActionName => string.Empty;
 
 	public string InteractionName => interactionName;
 
@@ -20,10 +20,13 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 		objectCollider = GetComponent<Collider>();
 	}
 
-	public void DropItem()
+	public void DropItem(Vector3 force)
 	{
 		objectCollider.enabled = true;
 		rbody.isKinematic = false;
+
+		if(force != Vector3.zero)
+			rbody.AddForce(force, ForceMode.Impulse);
 	}
 
 	public void Interact(InputAction action)
@@ -37,6 +40,7 @@ public class EquipInteractable : MonoBehaviour, IInteractable
 			rbody.isKinematic = true;
 		}
 	}
+
 
 	public virtual void ItemUsePressed(InputAction action) {	}
 

@@ -464,6 +464,22 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Item Drop
       m_Flags: 0
+  itemThrowAction:
+    m_Name: Item Throw
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5aa30aa5-15f6-44ef-8a33-d44e784e91a2
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: a11c7365-2a27-48f3-935a-fed140b8620b
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Item Throw
+      m_Flags: 0
 --- !u!1001 &3457656204623732998
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -484,7 +500,7 @@ PrefabInstance:
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.20000005
+      value: 0.11111114
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81,
         type: 3}

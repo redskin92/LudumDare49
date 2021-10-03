@@ -9,12 +9,14 @@ public class PlayerInventory : MonoBehaviour
 	[SerializeField] private Transform EquipLocation;
 	public InputAction itemUseAction;
 	public InputAction itemDropAction;
+	public InputAction itemThrowAction;
 
-	private string dropAction = "Press Q to drop";
+	private string dropAction = "Press Q to drop\nRight Click to throw";
 
 	private EquipInteractable currentlyEquipedItem;
 	private Transform equipedItemPrevParent;
 	private bool Busy = false;
+	private CharacterController charController;
 
 	private TextMeshProUGUI interactionTextMesh => playerInteract.interactionTextMesh;
 
@@ -23,7 +25,10 @@ public class PlayerInventory : MonoBehaviour
 		itemUseAction.started += ItemUseAction;
 		itemUseAction.canceled += ItemUseCancelled;
 
+		itemThrowAction.started += ItemThrowAction;
+
 		itemDropAction.started += ItemDropAction;
+		charController = GetComponent<CharacterController>();
 	}
 
 	private void ItemUseAction(InputAction.CallbackContext obj)
@@ -41,7 +46,14 @@ public class PlayerInventory : MonoBehaviour
 	private void ItemDropAction(InputAction.CallbackContext obj)
 	{
 		if (currentlyEquipedItem == null) return;
-		DropItem();
+		DropItem(charController.velocity);
+	}
+
+	private void ItemThrowAction(InputAction.CallbackContext obj)
+	{
+		if (currentlyEquipedItem == null) return;
+
+		DropItem(Vector3.Lerp(charController.velocity.normalized, transform.forward, .5f) * 10f);
 	}
 
 	public bool EquipItem(EquipInteractable itemToEquip)
@@ -54,6 +66,7 @@ public class PlayerInventory : MonoBehaviour
 
 		itemUseAction.Enable();
 		itemDropAction.Enable();
+		itemThrowAction.Enable();
 
 		equipedItemPrevParent = itemToEquip.transform.parent;
 		currentlyEquipedItem = itemToEquip;
@@ -64,7 +77,7 @@ public class PlayerInventory : MonoBehaviour
 		return true;
 	}
 
-	public void DropItem()
+	public void DropItem(Vector3 force)
 	{
 		StopAllCoroutines();
 
@@ -73,11 +86,12 @@ public class PlayerInventory : MonoBehaviour
 
 		itemUseAction.Disable();
 		itemDropAction.Disable();
+		itemThrowAction.Disable();
 
 		if (currentlyEquipedItem != null)
 		{
 			currentlyEquipedItem.transform.SetParent(equipedItemPrevParent, true);
-			currentlyEquipedItem.DropItem();
+			currentlyEquipedItem.DropItem(force);
 
 			currentlyEquipedItem = null;
 			equipedItemPrevParent = null;

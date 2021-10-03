@@ -6,6 +6,9 @@ public class FireExtinquisher : EquipInteractable
 	[SerializeField] private ParticleSystem whiteShitThatComesout;
 	[SerializeField] private BoxCollider streamCollider;
 
+	public override string useActionName => "Left Click to use";
+
+
 	protected override void Awake()
 	{
 		base.Awake();
