@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EmailsTask : TaskBase
@@ -12,7 +10,10 @@ public class EmailsTask : TaskBase
 	[SerializeField]
 	private Texture2D emailTexture;
 
-	private MeshRenderer meshRenderer;
+    private ProgressMeter progressMeter;
+    private MeshRenderer meshRenderer;
+
+    private bool interactionStarted;
 
 	private void Awake()
 	{
@@ -29,28 +30,66 @@ public class EmailsTask : TaskBase
 		rng = Random.Range(0, 100f);
 		if(rng > 50f)
 			UpdateTexture(false);
-	}
 
-	public override void ActivateTask()
+        computerHold.ProgressStarted += ComputerHold_ProgressStarted;
+        computerHold.ProgressComplete += ComputerHold_ProgressComplete;
+        computerHold.ProgressCanceled += ComputerHold_ProgressCanceled;
+    }
+
+    private void Start()
+    {
+        progressMeter = FindObjectOfType<ProgressMeter>();
+    }
+
+    private void OnDestroy()
+    {
+        if (computerHold != null)
+        {
+            computerHold.ProgressStarted -= ComputerHold_ProgressStarted;
+            computerHold.ProgressComplete -= ComputerHold_ProgressComplete;
+            computerHold.ProgressCanceled -= ComputerHold_ProgressCanceled;
+        }
+    }
+
+    private void Update()
+    {
+        if (interactionStarted)
+            progressMeter.SetProgress(computerHold.CurrentProgress);
+    }
+
+    public override void ActivateTask()
 	{
 		base.ActivateTask();
 
 		computerHold.Interactable = true;
-		computerHold.ProgressComplete += ComputerHold_ProgressComplete;
 
 		UpdateTexture(true);
 	}
 
-	private void ComputerHold_ProgressComplete()
+    private void ComputerHold_ProgressStarted()
+    {
+        interactionStarted = true;
+    }
+
+    private void ComputerHold_ProgressComplete()
 	{
-		computerHold.ProgressComplete -= ComputerHold_ProgressComplete;
+        interactionStarted = false;
+        computerHold.ProgressComplete -= ComputerHold_ProgressComplete;
 		computerHold.Interactable = false;
+        progressMeter.ProgressComplete();
 		FireTaskComplete();
 
 		UpdateTexture(false);
-	}
+    }
 
-	private void UpdateTexture(bool active)
+    private void ComputerHold_ProgressCanceled()
+    {
+        interactionStarted = false;
+
+        progressMeter.ResetProgress();
+    }
+
+    private void UpdateTexture(bool active)
 	{
 		ToggleMonitor(true);
 		meshRenderer.materials[1].SetTexture("_EmissionTexture", active ? emailTexture : backgroundTexture);

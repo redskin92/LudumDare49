@@ -9,21 +9,36 @@ public class ServerTask : UrgentTaskBase
 
 	[SerializeField] private List<Light> lights;
 
+    private ProgressMeter progressMeter;
+
 	private float lightsTimer;
 
 	float currentTimer;
 
-	public void Awake()
+    private bool interactionStarted;
+
+    public void Awake()
 	{
 		foreach (var light in lights)
 			light.color = Color.green;
 
 		lightsTimer = 1f;
-		serverIteractable.Interactable = false;
-		serverIteractable.ProgressComplete += ServerRepaired;
-	}
+        serverIteractable.ProgressStarted += ServerIteractable_ProgressStarted;
+        serverIteractable.ProgressComplete += ServerRepaired;
+        serverIteractable.ProgressCanceled += ServerIteractable_ProgressCanceled;
+    }
 
-	public override void ActivateTask()
+    private void OnDestroy()
+    {
+        if (serverIteractable != null)
+        {
+            serverIteractable.ProgressStarted += ServerIteractable_ProgressStarted;
+            serverIteractable.ProgressComplete += ServerRepaired;
+            serverIteractable.ProgressCanceled += ServerIteractable_ProgressCanceled;
+        }
+    }
+
+    public override void ActivateTask()
 	{
 		base.ActivateTask();
 		currentTimer = failTimer;
@@ -43,13 +58,20 @@ public class ServerTask : UrgentTaskBase
 	{
 		IsActive = false;
 		serverIteractable.Interactable = false;
+        interactionStarted = false;
+        progressMeter.ProgressComplete();
 		FireTaskComplete();
 
 		foreach (var light in lights)
 			light.color = Color.green;
 	}
 
-	public void Update()
+    private void Start()
+    {
+        progressMeter = FindObjectOfType<ProgressMeter>();
+    }
+
+    public void Update()
 	{
 		UpdateLights();
 
@@ -62,7 +84,10 @@ public class ServerTask : UrgentTaskBase
 			currentTimer = failTimer;
 			FireTaskFailed();
 		}
-	}
+
+        if (interactionStarted)
+            progressMeter.SetProgress(serverIteractable.CurrentProgress);
+    }
 
 	private void UpdateLights()
 	{
@@ -75,6 +100,18 @@ public class ServerTask : UrgentTaskBase
 
 			lightsTimer = IsActive ? 0.5f : 2f;
 		}
-	}
+    }
+
+    private void ServerIteractable_ProgressStarted()
+    {
+        interactionStarted = true;
+    }
+
+    private void ServerIteractable_ProgressCanceled()
+    {
+        interactionStarted = false;
+
+        progressMeter.ResetProgress();
+    }
 }
 
