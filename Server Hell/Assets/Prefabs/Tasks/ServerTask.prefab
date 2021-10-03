@@ -534,8 +534,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   taskName: Server Repair
-  stabilityGainOnSuccess: 0
-  stabilityLossOnFail: 0
+  stabilityGainOnSuccess: 10
+  stabilityLossOnFail: 10
   serverIteractable: {fileID: 2273698615738059726}
   failTimer: 30
   lights:
