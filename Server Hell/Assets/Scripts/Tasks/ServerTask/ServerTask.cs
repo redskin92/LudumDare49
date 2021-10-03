@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ServerTask : UrgentTaskBase
@@ -7,22 +8,26 @@ public class ServerTask : UrgentTaskBase
 	[SerializeField] private HoldInteractable serverIteractable;
 	[SerializeField] private float failTimer = 30f;
 
-	[SerializeField] private List<Light> lights;
+	[SerializeField] private Transform slotParent;
+	[SerializeField] private GameObject slotFan, slotScreen;
 
+	private List<ServerLight> lights = new List<ServerLight>();
     private ProgressMeter progressMeter;
-
-	private float lightsTimer;
-
-	float currentTimer;
-
     private bool interactionStarted;
 
-    public void Awake()
+	private void Start()
 	{
-		foreach (var light in lights)
-			light.color = Color.green;
+		progressMeter = FindObjectOfType<ProgressMeter>();
+	}
 
-		lightsTimer = 1f;
+	public void Awake()
+	{
+		PopulateSlots();
+
+		foreach (var light in lights)
+			light.SetLightStatus(true);
+
+		serverIteractable.Interactable = false;
         serverIteractable.ProgressStarted += ServerIteractable_ProgressStarted;
         serverIteractable.ProgressComplete += ServerRepaired;
         serverIteractable.ProgressCanceled += ServerIteractable_ProgressCanceled;
@@ -38,18 +43,40 @@ public class ServerTask : UrgentTaskBase
         }
     }
 
+	private void PopulateSlots()
+	{
+		int numSlots = 8;
+		List<GameObject> slotsToAdd = new List<GameObject>();
+
+		slotsToAdd.Add(slotScreen);
+		while(slotsToAdd.Count < numSlots)
+		{
+			var slotType = Random.Range(0, 2) == 0 ? slotFan : slotScreen;
+			slotsToAdd.Add(Random.Range(0, 7) == 0 ? null : slotType);
+		}
+
+		slotsToAdd = slotsToAdd.OrderBy(c => Random.Range(0, 100)).ToList();
+
+
+		float yPosition = 2.6f;
+		for(int i = 0; i < 8; ++i)
+		{
+			if (slotsToAdd[i] != null)
+			{
+				var slot = GameObject.Instantiate(slotsToAdd[i], slotParent);
+				slot.transform.localPosition = new Vector3(0.0f, yPosition, 0.0f);
+				lights.AddRange(slot.GetComponentsInChildren<ServerLight>());
+			}
+			yPosition -= 0.45f;
+		}
+	}
+
     public override void ActivateTask()
 	{
 		base.ActivateTask();
-		currentTimer = failTimer;
 
 		foreach (var light in lights)
-		{
-			light.color = Color.red;
-			light.enabled = true;
-		}
-
-		lightsTimer = 0.5f;
+			light.SetLightStatus(false);
 
 		serverIteractable.Interactable = true;
 	}
@@ -63,43 +90,17 @@ public class ServerTask : UrgentTaskBase
 		FireTaskComplete();
 
 		foreach (var light in lights)
-			light.color = Color.green;
+			light.SetLightStatus(true);
 	}
 
-    private void Start()
-    {
-        progressMeter = FindObjectOfType<ProgressMeter>();
-    }
+
 
     public void Update()
 	{
-		UpdateLights();
-
 		if (!IsActive) return;
-
-		currentTimer -= Time.deltaTime;
-
-		if (currentTimer <= 0)
-		{
-			currentTimer = failTimer;
-			FireTaskFailed();
-		}
 
         if (interactionStarted)
             progressMeter.SetProgress(serverIteractable.CurrentProgress);
-    }
-
-	private void UpdateLights()
-	{
-		lightsTimer -= Time.deltaTime;
-
-		if(lightsTimer <= 0f)
-		{
-			foreach (var light in lights)
-				light.enabled = !light.enabled;
-
-			lightsTimer = IsActive ? 0.5f : 2f;
-		}
     }
 
     private void ServerIteractable_ProgressStarted()
