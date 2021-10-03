@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6299644577241254478}
+  - component: {fileID: 3177251262166323888}
   m_Layer: 0
   m_Name: DeskAndChair
   m_TagString: Untagged
@@ -35,6 +36,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3177251262166323888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051552438018956880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6705b35e9b9595548a1369f72f368571, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: Send Emails
+  stabilityGainOnSuccess: 10
+  computerHold: {fileID: 878504442652158358}
+  defaultScreenMaterial: {fileID: -8896051167825165466, guid: ebc92a2739d2886499e5bc97d3e86847,
+    type: 3}
+  taskActiveScreenMaterial: {fileID: -3026631972412005785, guid: 3fa81db304611864cbdb17449525ac73,
+    type: 3}
+--- !u!65 &6645543739054224028
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354354625196751111}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9634404, y: 1.471426, z: 0.5200201}
+  m_Center: {x: 0.9817205, y: 0.735713, z: 0.2600091}
+--- !u!114 &878504442652158358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354354625196751111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3853ed7dcf826484ab7e3bac598a4be1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionName: Press 'E' to reply
+  timeToComplete: 5
 --- !u!1001 &1543841440253220426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +226,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebc92a2739d2886499e5bc97d3e86847, type: 3}
+--- !u!1 &3354354625196751111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ebc92a2739d2886499e5bc97d3e86847,
+    type: 3}
+  m_PrefabInstance: {fileID: 2471462529617314902}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2722108692479222717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ebc92a2739d2886499e5bc97d3e86847,
