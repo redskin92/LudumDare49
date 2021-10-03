@@ -10,6 +10,7 @@ public abstract class TaskBase : MonoBehaviour
 	public bool IsActive { get; protected set; }
 
     public event Action<TaskBase> TaskComplete;
+	public event Action<TaskBase> TaskNameUpdate;
 
     public void FireTaskComplete()
     {
@@ -18,6 +19,14 @@ public abstract class TaskBase : MonoBehaviour
         if (TaskComplete != null)
             TaskComplete(this);
     }
+
+	public void UpdateTaskName(string newName)
+	{
+		taskName = newName;
+
+		if (TaskNameUpdate != null)
+			TaskNameUpdate(this);
+	}
 
     /// <summary>
     /// Make this task become active.

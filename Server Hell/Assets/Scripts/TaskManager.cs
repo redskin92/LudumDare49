@@ -36,6 +36,7 @@ public class TaskManager : MonoBehaviour
         foreach (var task in routineTasks)
         {
             task.TaskComplete += RoutineTask_TaskComplete;
+			task.TaskNameUpdate += Routine_TaskNameUpdate;
             task.ActivateTask();
 
             SpawnTaskDisplayUI(routineTasksDisplayParent, task);
@@ -45,6 +46,7 @@ public class TaskManager : MonoBehaviour
         {
             task.TaskComplete += UrgentTask_TaskComplete;
             task.TaskFailed += UrgentTask_TaskFailed;
+			task.TaskNameUpdate += Urgent_TaskNameUpdate;
         }
 
         Invoke("ActivateRandomUrgent", initialUrgentSpawnTime);
@@ -79,13 +81,17 @@ public class TaskManager : MonoBehaviour
 
     private void UnregisterTaskEvents()
     {
-        foreach (var task in routineTasks)
-            task.TaskComplete -= RoutineTask_TaskComplete;
+		foreach (var task in routineTasks)
+		{
+			task.TaskComplete -= RoutineTask_TaskComplete;
+			task.TaskNameUpdate -= Routine_TaskNameUpdate;
+		}
 
         foreach (var task in urgentTasks)
         {
             task.TaskComplete -= UrgentTask_TaskComplete;
             task.TaskFailed -= UrgentTask_TaskFailed;
+			task.TaskNameUpdate -= Urgent_TaskNameUpdate;
         }
     }
 
@@ -227,7 +233,23 @@ public class TaskManager : MonoBehaviour
             StabilityMeter.Instance.StabilityDecrease(task.stabilityLossOnFail);
     }
 
-    private class TaskLabelCount
+	private void Routine_TaskNameUpdate(TaskBase task)
+	{
+		var group = routineTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
+		if (group == null) return;
+
+		group.textMesh.text = task.name;
+	}
+
+	private void Urgent_TaskNameUpdate(TaskBase task)
+	{
+		var group = urgentTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
+		if (group == null) return;
+
+		group.textMesh.text = task.name;
+	}
+
+	private class TaskLabelCount
     {
         private const string TASK_FORMAT = "- {0}{1}";
 
