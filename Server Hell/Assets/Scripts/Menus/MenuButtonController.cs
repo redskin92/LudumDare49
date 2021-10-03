@@ -23,37 +23,48 @@ public class MenuButtonController : MonoBehaviour
 
     protected int buttonIndex = 0;
 
-    protected float updateButtonsBuffer = 0.2f;
-
-    protected float currentButtonsBuffer = 0;
-
-    private void Awake()
+    protected virtual void Awake()
     {
         UpdateSelectedButton(false);
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         EnableButtons();
 
-        navigateUp.canceled += Navigate_Up;
-        navigateDown.canceled += Navigate_Down;
-        buttonActivate.canceled += Select_Button;
+        RegisterButtons();
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         DisableButtons();
+
+        StopCoroutine("StartInteractionSequence");
     }
 
-    public void EnableButtons()
+    public virtual void EnableButtons()
     {
         navigateUp.Enable();
         navigateDown.Enable();
         buttonActivate.Enable();
     }
 
-    public void DisableButtons()
+    public virtual void RegisterButtons()
+    {
+        navigateUp.canceled += Navigate_Up;
+        navigateDown.canceled += Navigate_Down;
+
+        DelayButtonPressed();
+    }
+
+    public virtual void UnRegisterButtons()
+    {
+        navigateUp.canceled -= Navigate_Up;
+        navigateDown.canceled -= Navigate_Down;
+        buttonActivate.canceled -= Select_Button;
+    }
+
+    public virtual void DisableButtons()
     {
         navigateUp.canceled -= Navigate_Up;
         navigateDown.canceled -= Navigate_Down;
@@ -66,14 +77,12 @@ public class MenuButtonController : MonoBehaviour
 
     private void Navigate_Up(InputAction.CallbackContext obj)
     {
-        ++buttonIndex;
+        --buttonIndex;
 
-        if (buttonIndex > menuButtons.Count - 1)
+        if (buttonIndex < 0)
         {
-            buttonIndex = 0;
+            buttonIndex = menuButtons.Count - 1;
         }
-
-        currentButtonsBuffer = updateButtonsBuffer;
 
         UpdateSelectedButton();
 
@@ -82,14 +91,12 @@ public class MenuButtonController : MonoBehaviour
 
     private void Navigate_Down(InputAction.CallbackContext obj)
     {
-        --buttonIndex;
+        ++buttonIndex;
 
-        if (buttonIndex < 0)
+        if (buttonIndex > menuButtons.Count - 1)
         {
-            buttonIndex = menuButtons.Count - 1;
+            buttonIndex = 0;
         }
-
-        currentButtonsBuffer = updateButtonsBuffer;
 
         UpdateSelectedButton();
 
@@ -108,7 +115,7 @@ public class MenuButtonController : MonoBehaviour
         }
     }
 
-    protected void UpdateSelectedButton(bool playSounds = true)
+    protected virtual void UpdateSelectedButton(bool playSounds = true)
     {
         for(int i = 0; i < menuButtons.Count; ++i)
         {
@@ -133,5 +140,17 @@ public class MenuButtonController : MonoBehaviour
         {
             navigateButtonSound.Play();
         }
+    }
+
+    public void DelayButtonPressed()
+    {
+        StartCoroutine("StartInteractionSequence");
+    }
+
+    private IEnumerator StartInteractionSequence()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        buttonActivate.canceled += Select_Button;
     }
 }

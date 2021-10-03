@@ -22,7 +22,6 @@ public class MenuButtons : MonoBehaviour
     /// </summary>
     public virtual void PressButton()
     {
-        UnityEngine.Debug.Log("No action selected for this button: " + name);
     }
 
     /// <summary>
@@ -47,7 +46,7 @@ public class MenuButtons : MonoBehaviour
         {
             if (SoundVolumeController.Instance)
             {
-                SoundVolumeController.Instance.PlayMusic(buttonSelectedSound);
+                SoundVolumeController.Instance.PlaySound(buttonSelectedSound);
             }
             else
             {

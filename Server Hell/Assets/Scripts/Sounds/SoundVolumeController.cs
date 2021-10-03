@@ -19,6 +19,8 @@ using UnityEngine;
 
 public class SoundVolumeController : MonoBehaviour
 {
+    public OptionMenuController optionMenuController;
+
     public float effectsScale = 1.0f;
 
     public float musicScale = 1.0f;
@@ -82,5 +84,13 @@ public class SoundVolumeController : MonoBehaviour
         sound.source.Play();
 
         currentMusic = sound;
+    }
+
+    public void EnableOptions(MenuButtonController buttonController)
+    {
+        if(optionMenuController)
+        {
+            optionMenuController.EnableOptionsMenu(buttonController);
+        }
     }
 }
