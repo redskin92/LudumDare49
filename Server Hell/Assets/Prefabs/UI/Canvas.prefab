@@ -933,13 +933,14 @@ GameObject:
   - component: {fileID: 6169203912916499962}
   - component: {fileID: 6169203912916499960}
   - component: {fileID: 6169203912916499961}
+  - component: {fileID: 23364219}
   m_Layer: 5
-  m_Name: Progress Bar
+  m_Name: Progress Meter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6169203912916499962
 RectTransform:
   m_ObjectHideFlags: 0
@@ -992,8 +993,20 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &23364219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6169203912916499963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76dc59d429301cf4a9ed3a974c31ad6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

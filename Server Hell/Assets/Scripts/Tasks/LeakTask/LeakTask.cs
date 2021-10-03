@@ -4,9 +4,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(HoldInteractable))]
 public class LeakTask : UrgentTaskBase
 {
-    public Image image;
     public float timeBeforeFail = 10f;
 
+    private ProgressMeter progressMeter;
     private HoldInteractable holdInteractable;
     private bool interactionStarted;
 
@@ -38,6 +38,8 @@ public class LeakTask : UrgentTaskBase
 
     private void Start()
     {
+        progressMeter = FindObjectOfType<ProgressMeter>();
+
         holdInteractable.Interactable = false;
 
         RegisterEvents();
@@ -51,7 +53,7 @@ public class LeakTask : UrgentTaskBase
     private void Update()
     {
         if (interactionStarted)
-            image.fillAmount = holdInteractable.CurrentProgress;
+            progressMeter.SetProgress(holdInteractable.CurrentProgress);
     }
 
     private void RegisterEvents()
@@ -75,16 +77,14 @@ public class LeakTask : UrgentTaskBase
 
     private void HoldInteractable_ProgressStarted()
     {
-        image.gameObject.SetActive(true);
-
         interactionStarted = true;
     }
 
     private void HoldInteractable_ProgressComplete()
     {
-        image.gameObject.SetActive(false);
-
         interactionStarted = false;
+
+        progressMeter.ProgressComplete();
 
         DeactivateTask();
 
@@ -95,8 +95,8 @@ public class LeakTask : UrgentTaskBase
 
     private void HoldInteractable_ProgressCanceled()
     {
-        image.gameObject.SetActive(false);
-
         interactionStarted = false;
+
+        progressMeter.ResetProgress();
     }
 }
