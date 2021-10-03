@@ -786,7 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundFadeManager: {fileID: 648925607}
   playScenesList:
-  - Mug Stacking Test
+  - OfficeScene
   mainMenu: MainMenu
   fadeTime: 1
 --- !u!4 &1837216080

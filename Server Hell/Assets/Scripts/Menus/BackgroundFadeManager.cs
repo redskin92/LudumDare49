@@ -13,8 +13,7 @@ public class BackgroundFadeManager : MonoBehaviour
     [SerializeField]
     protected Image fadeImage;
 
-    [SerializeField]
-    protected float fadeTime;
+    protected float fadeTime = 1f;
 
     float currentFadeTime = 0f;
 
