@@ -20,6 +20,8 @@ public class TaskManager : MonoBehaviour
     private int completedTasks;
     private int tasksToComplete;
 
+    private string prevTask = string.Empty;
+
     private void Start()
     {
         FindAndAssignTasks();
@@ -84,9 +86,12 @@ public class TaskManager : MonoBehaviour
 
     private void ActivateRandomUrgent()
     {
-        var availableUrgents = urgentTasks.Where(x => !x.IsActive).ToList();
-
-        int count = availableUrgents.Count;
+        List<UrgentTaskBase> availableUrgents;
+        int count = urgentTasks.Count(x => !x.IsActive && x.taskName != prevTask);
+        if (count > 0)
+            availableUrgents = urgentTasks.Where(x => !x.IsActive && x.taskName != prevTask).ToList();
+        else
+            availableUrgents = urgentTasks.Where(x => !x.IsActive).ToList();
 
         switch (count)
         {
@@ -122,6 +127,8 @@ public class TaskManager : MonoBehaviour
     {
         task.ActivateTask();
         SpawnTaskDisplayUI(urgentTasksDisplayParent, task);
+
+        prevTask = task.taskName;
     }
 
     private void SpawnTaskDisplayUI(RectTransform parent, TaskBase task)
