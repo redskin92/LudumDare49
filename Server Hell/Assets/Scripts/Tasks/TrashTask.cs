@@ -5,9 +5,11 @@ using UnityEngine;
 public class TrashTask : TaskBase
 {
 	[SerializeField] private List<Trashbag> trashBags;
-	
-    // Start is called before the first frame update
-    void Start()
+	public AudioSource completedSound;
+
+
+	// Start is called before the first frame update
+	void Start()
     {
         foreach(var bag in trashBags)
 		{
@@ -21,6 +23,9 @@ public class TrashTask : TaskBase
 
 		if(trashBags.Contains(bag))
 			trashBags.Remove(bag);
+
+		Destroy(bag.gameObject);
+		completedSound.Play();
 
 		if (trashBags.Count <= 0)
 		{
