@@ -21,8 +21,6 @@ public class ServerTask : UrgentTaskBase
 		lightsTimer = 1f;
 		serverIteractable.Interactable = false;
 		serverIteractable.ProgressComplete += ServerRepaired;
-
-		ActivateTask();
 	}
 
 	public override void ActivateTask()
