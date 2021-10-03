@@ -122,8 +122,9 @@ MonoBehaviour:
   urgentTasksDisplayParent: {fileID: 6169203912483390182}
   taskNameDisplayPrefab: {fileID: 1348750252016660423, guid: f29650013603d6848837f50cb1a19992,
     type: 3}
-  minUrgentSpawnTime: 5
-  maxUrgentSpawnTime: 5
+  minUrgentSpawnTime: 20
+  maxUrgentSpawnTime: 30
+  initialUrgentSpawnTime: 0
 --- !u!1 &6169203912159570580
 GameObject:
   m_ObjectHideFlags: 0

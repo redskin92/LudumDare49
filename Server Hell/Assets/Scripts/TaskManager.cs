@@ -12,7 +12,7 @@ public class TaskManager : MonoBehaviour
     private List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
     [SerializeField]
-    private float minUrgentSpawnTime, maxUrgentSpawnTime;
+    private float minUrgentSpawnTime, maxUrgentSpawnTime, initialUrgentSpawnTime;
 
     private List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
     private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
@@ -40,7 +40,7 @@ public class TaskManager : MonoBehaviour
             task.TaskFailed += UrgentTask_TaskFailed;
         }
 
-        SpawnRandomUrgentAfterDelay();
+        Invoke("ActivateRandomUrgent", initialUrgentSpawnTime);
     }
 
     private void FindAndAssignTasks()
