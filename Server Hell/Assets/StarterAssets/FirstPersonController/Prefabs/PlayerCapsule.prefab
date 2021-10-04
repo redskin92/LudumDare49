@@ -434,6 +434,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerInteract: {fileID: 1550399372}
   EquipLocation: {fileID: 3715676074452664128}
+  cameraT: {fileID: 6225640760722257020}
   itemUseAction:
     m_Name: Item Use
     m_Type: 0

@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
 {
 	[SerializeField] private PlayerInteract playerInteract;
 	[SerializeField] private Transform EquipLocation;
+	public Transform cameraT;
 	public InputAction itemUseAction;
 	public InputAction itemDropAction;
 	public InputAction itemThrowAction;
@@ -53,6 +54,11 @@ public class PlayerInventory : MonoBehaviour
 	{
 		if (currentlyEquipedItem == null) return;
 
+		Vector3 vecToEquipItem = EquipLocation.position - cameraT.position;
+
+		if (Physics.Raycast(cameraT.position, vecToEquipItem.normalized, out var info, vecToEquipItem.magnitude))
+			return;
+		
 		DropItem(Vector3.Lerp(charController.velocity.normalized, transform.forward, .5f) * 10f);
 	}
 
