@@ -11,6 +11,9 @@ public class ServerTask : UrgentTaskBase
 	[SerializeField] private Transform slotParent;
 	[SerializeField] private GameObject slotFan, slotScreen;
 
+	[SerializeField]
+	private GameObject minimapIndicator;
+
 	private List<ServerLight> lights = new List<ServerLight>();
     private ProgressMeter progressMeter;
     private bool interactionStarted;
@@ -18,6 +21,7 @@ public class ServerTask : UrgentTaskBase
 	private void Start()
 	{
 		progressMeter = FindObjectOfType<ProgressMeter>();
+		minimapIndicator.SetActive(false);
 	}
 
 	public void Awake()
@@ -31,7 +35,7 @@ public class ServerTask : UrgentTaskBase
         serverIteractable.ProgressStarted += ServerIteractable_ProgressStarted;
         serverIteractable.ProgressComplete += ServerRepaired;
         serverIteractable.ProgressCanceled += ServerIteractable_ProgressCanceled;
-    }
+	}
 
     private void OnDestroy()
     {
@@ -77,6 +81,8 @@ public class ServerTask : UrgentTaskBase
 
 		foreach (var light in lights)
 			light.SetLightStatus(false);
+		
+		minimapIndicator.SetActive(true);
 
 		serverIteractable.Interactable = true;
 	}
@@ -88,6 +94,8 @@ public class ServerTask : UrgentTaskBase
         interactionStarted = false;
         progressMeter.ProgressComplete();
 		FireTaskComplete();
+		
+		minimapIndicator.SetActive(false);
 
 		foreach (var light in lights)
 			light.SetLightStatus(true);
