@@ -21822,6 +21822,7 @@ GameObject:
   m_Component:
   - component: {fileID: 714495346}
   - component: {fileID: 714495347}
+  - component: {fileID: 714495348}
   m_Layer: 0
   m_Name: SuccessAudio
   m_TagString: Untagged
@@ -21855,7 +21856,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0a7f1eda24c924b4fb15add113bdb1c2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.666
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -21939,6 +21940,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &714495348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 714495345}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a42e9d3bc42a4a42a2ccdbd81b50614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 714495347}
+  isMusic: 0
+  fadeSoundTime: 0.5
+  originalVolume: 0
 --- !u!1001 &718012200
 PrefabInstance:
   m_ObjectHideFlags: 0
