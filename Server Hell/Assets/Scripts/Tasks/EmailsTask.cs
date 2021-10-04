@@ -43,7 +43,7 @@ public class EmailsTask : TaskBase
     private void Start()
     {
         progressMeter = FindObjectOfType<ProgressMeter>();
-        minimapIndicator.SetActive(false);
+        minimapIndicator.SetActive(IsActive);
     }
 
     private void OnDestroy()

@@ -52,7 +52,7 @@ public class PhonesTask : UrgentTaskBase
         progressMeter = FindObjectOfType<ProgressMeter>();
 
         holdInteractable.Interactable = false;
-        minimapIndicator.SetActive(false);
+        minimapIndicator.SetActive(IsActive);
 
         RegisterEvents();
     }

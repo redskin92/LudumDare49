@@ -21,7 +21,7 @@ public class ServerTask : UrgentTaskBase
 	private void Start()
 	{
 		progressMeter = FindObjectOfType<ProgressMeter>();
-		minimapIndicator.SetActive(false);
+		minimapIndicator.SetActive(IsActive);
 	}
 
 	public void Awake()
