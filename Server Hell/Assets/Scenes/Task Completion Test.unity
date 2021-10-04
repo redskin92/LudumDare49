@@ -240,6 +240,75 @@ ReflectionProbe:
   m_UseOcclusionCulling: 1
   m_Importance: 1
   m_CustomBakedTexture: {fileID: 0}
+--- !u!1001 &613425655
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.749
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.709
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2278313696644975375, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5695121581672935007, guid: 9dac18a402e418e439f028de779cbc7e,
+        type: 3}
+      propertyPath: m_Name
+      value: FireExtinguisher
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9dac18a402e418e439f028de779cbc7e, type: 3}
 --- !u!1001 &746329221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -721,6 +790,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireTask
       objectReference: {fileID: 0}
+    - target: {fileID: 7620893400242159746, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236f710be518e3d4688ad1445d7a78cd, type: 3}
 --- !u!114 &1286741342 stripped
@@ -801,6 +875,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ServerTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 5427548857698111582, guid: c0091d166e15cca4eaa3d451f26c96f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0091d166e15cca4eaa3d451f26c96f9, type: 3}
@@ -934,6 +1013,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TrashTask
+      objectReference: {fileID: 0}
+    - target: {fileID: 1140160828212346030, guid: a27cae477ebc3e544b4c1b5e32829bcc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a27cae477ebc3e544b4c1b5e32829bcc, type: 3}
@@ -1145,6 +1229,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Phone Task (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836270973908026793, guid: 6932c230a5d449e49bf3daf372746b47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6932c230a5d449e49bf3daf372746b47, type: 3}
@@ -1519,6 +1608,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Phone Task
+      objectReference: {fileID: 0}
+    - target: {fileID: 4836270973908026793, guid: 6932c230a5d449e49bf3daf372746b47,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6932c230a5d449e49bf3daf372746b47, type: 3}
@@ -1946,6 +2040,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Leak Task
+      objectReference: {fileID: 0}
+    - target: {fileID: 7121542860780741767, guid: 92f87cef0e6577b41a660a9fa52a13cf,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7121542860780741770, guid: 92f87cef0e6577b41a660a9fa52a13cf,
         type: 3}
