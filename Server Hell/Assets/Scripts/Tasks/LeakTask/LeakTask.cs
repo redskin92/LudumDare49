@@ -6,6 +6,9 @@ public class LeakTask : UrgentTaskBase
 {
     public float timeBeforeFail = 10f;
 
+    [SerializeField]
+    private GameObject minimapIndicator;
+    
     private ProgressMeter progressMeter;
     private HoldInteractable holdInteractable;
     private bool interactionStarted;
@@ -19,6 +22,8 @@ public class LeakTask : UrgentTaskBase
 
         holdInteractable.Interactable = true;
         waterSprayParticles.Play();
+        
+        minimapIndicator.SetActive(true);
 
         InvokeRepeating("Fail", timeBeforeFail, timeBeforeFail);
     }
@@ -28,6 +33,7 @@ public class LeakTask : UrgentTaskBase
         CancelInvoke("Fail");
         holdInteractable.Interactable = false;
         waterSprayParticles.Stop();
+        minimapIndicator.SetActive(false);
     }
 
     private void Awake()
