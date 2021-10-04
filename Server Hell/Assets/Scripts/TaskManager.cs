@@ -146,8 +146,9 @@ public class TaskManager : MonoBehaviour
                     ActivateNewUrgentTask(availableUrgents[0]);
                     break;
                 default:
-                    var taskNames = availableUrgents.Select(x => x.taskName).Distinct();
-                    string taskName = taskNames.ElementAt(UnityEngine.Random.Range(0, taskNames.Count()));
+                    var taskNames = availableUrgents.Select(x => x.taskName).Distinct().ToList();
+                    int index = UnityEngine.Random.Range(0, taskNames.Count);
+                    string taskName = taskNames[index];
 
                     var tasksByName = availableUrgents.Where(x => x.taskName == taskName);
 
