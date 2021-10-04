@@ -140,7 +140,7 @@ public class TaskManager : MonoBehaviour
                     break;
                 default:
                     var taskNames = availableUrgents.Select(x => x.taskName).Distinct();
-                    string taskName = taskNames.ElementAt(UnityEngine.Random.Range(0, taskNames.Count() - 1));
+                    string taskName = taskNames.ElementAt(UnityEngine.Random.Range(0, taskNames.Count()));
 
                     var tasksByName = availableUrgents.Where(x => x.taskName == taskName);
 
