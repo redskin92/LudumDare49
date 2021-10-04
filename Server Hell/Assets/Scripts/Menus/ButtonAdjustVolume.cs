@@ -37,8 +37,6 @@ public class ButtonAdjustVolume : MenuButtons
 
         if (volumeText)
         {
-            UnityEngine.Debug.Log("StartVolume: " + volume);
-
             volumeAlphaStart = volumeText.color.a;
 
             volumeText.text = ((int)(volume * 100)).ToString();
