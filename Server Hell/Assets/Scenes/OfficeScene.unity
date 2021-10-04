@@ -22225,6 +22225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 714495347}
   isMusic: 0
+  playOnStart: 0
   fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!1001 &718012200
@@ -23725,7 +23726,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &764045972
 Transform:
   m_ObjectHideFlags: 0
