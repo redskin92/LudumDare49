@@ -4,14 +4,12 @@ public class ShadowPeopleEffect : StabilityEffect
 {
     [SerializeField]
     protected SkinnedMeshRenderer meshRenderer;
-    
+
     [SerializeField]
     protected ParticleSystem particles;
 
-    protected override void Initialze()
+    protected override void DoInitialize()
     {
-        base.Initialze();
-
         if (StabilityMeter.Instance.Stability > triggerThreshold)
         {
             meshRenderer.enabled = false;
@@ -19,23 +17,16 @@ public class ShadowPeopleEffect : StabilityEffect
         }
     }
 
-    protected override void EnableEffect()
+    protected override void DoEnableEffect()
     {
-        base.EnableEffect();
-
         meshRenderer.enabled = true;
         particles.Play();
     }
 
-    protected override void UpdateEffect()
-    {
-        base.UpdateEffect();
-    }
+    protected override void DoUpdateEffect() { }
 
-    protected override void DisableEffect()
+    protected override void DoDisableEffect()
     {
-        base.DisableEffect();
-        
         meshRenderer.enabled = false;
         particles.Stop();
     }

@@ -1,26 +1,39 @@
 using UnityEngine;
 
-public class StabilityEffect : MonoBehaviour
+public abstract class StabilityEffect : MonoBehaviour
 {
     [SerializeField]
     protected float triggerThreshold;
 
+    protected bool initialized;
     protected bool active;
 
     protected void Start()
     {
-        Initialze();
+        Initialize();
     }
 
-    protected virtual void Initialze()
+    private void Initialize()
     {
+        if (initialized)
+            return;
+
+        initialized = true;
+        
         Register();
         
         UpdateStability();
+        
+        DoInitialize();
     }
 
-    protected virtual void UpdateStability()
+    protected abstract void DoInitialize();
+
+    private void UpdateStability()
     {
+        if (!initialized)
+            return;
+        
         if (StabilityMeter.Instance.Stability <= triggerThreshold)
             EnableEffect();
         else
@@ -29,33 +42,48 @@ public class StabilityEffect : MonoBehaviour
         UpdateEffect();
     }
 
-    protected virtual void EnableEffect()
+    protected void EnableEffect()
     {
+        if (!initialized)
+            return;
+        
         if (active)
             return;
 
         active = true;
-
-        Debug.Log(string.Format("Stability Effect {0} has been enabled at {1} stability!", name, StabilityMeter.Instance.Stability));
+        
+        DoEnableEffect();
     }
 
-    protected virtual void UpdateEffect()
+    protected abstract void DoEnableEffect();
+
+    protected void UpdateEffect()
     {
+        if (!initialized)
+            return;
+        
         if (!active)
             return;
         
-        Debug.Log(string.Format("Stability Effect {0} has updated its effect at {1} stability!", name, StabilityMeter.Instance.Stability));
+        DoUpdateEffect();
     }
 
-    protected virtual void DisableEffect()
+    protected abstract void DoUpdateEffect();
+
+    protected void DisableEffect()
     {
+        if (!initialized)
+            return;
+        
         if (!active)
             return;
 
         active = false;
-
-        Debug.Log(string.Format("Stability Effect {0} has been disabled at {1} stability!", name, StabilityMeter.Instance.Stability));
+        
+        DoDisableEffect();
     }
+    
+    protected abstract void DoDisableEffect();
 
     protected void Register()
     {
@@ -67,8 +95,11 @@ public class StabilityEffect : MonoBehaviour
         StabilityMeter.Instance.StabilityUpdated -= OnStabilityUpdated;
     }
 
-    protected virtual void OnStabilityUpdated()
+    protected void OnStabilityUpdated()
     {
+        if (!initialized)
+            return;
+        
         UpdateStability();
     }
 }
