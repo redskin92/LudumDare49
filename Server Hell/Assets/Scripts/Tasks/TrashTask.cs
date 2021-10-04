@@ -4,23 +4,32 @@ using UnityEngine;
 
 public class TrashTask : TaskBase
 {
-	[SerializeField] private List<Trashbag> trashBags;
-	public AudioSource completedSound;
+	[SerializeField] private Trashbag trashBagPrefab;
+	[SerializeField] private List<Transform> trashSpawnLocations;
+	[SerializeField] private int startingBagAmount = 5;
 
-	private int startingbagamount; 
+	public AudioSource completedSound;
+	private List<Trashbag> trashBags = new List<Trashbag>();
 
 
 	// Start is called before the first frame update
 	void Start()
     {
-        foreach(var bag in trashBags)
+		List<Transform> availLocations = new List<Transform>(trashSpawnLocations);
+
+		for(int i = 0; i < startingBagAmount; ++i)
 		{
+			var spawnLocation = availLocations[Random.Range(0, availLocations.Count)];
+			availLocations.Remove(spawnLocation);
+
+			var bag = GameObject.Instantiate(trashBagPrefab, spawnLocation);
+			trashBags.Add(bag);
 			bag.TrashThrownAway += TrashProcessed;
 		}
 
-		startingbagamount = trashBags.Count;
-		UpdateTaskName("Throw away trash (" + (startingbagamount - trashBags.Count) + " / " + startingbagamount + ")");
+		UpdateTaskName("Throw away trash (" + (startingBagAmount - trashBags.Count) + " / " + startingBagAmount + ")");
 	}
+
 
 	private void TrashProcessed(Trashbag bag)
 	{
@@ -29,7 +38,7 @@ public class TrashTask : TaskBase
 		if(trashBags.Contains(bag))
 			trashBags.Remove(bag);
 
-		UpdateTaskName("Throw away trash (" + (startingbagamount - trashBags.Count) + " / " + startingbagamount + ")");
+		UpdateTaskName("Throw away trash (" + (startingBagAmount - trashBags.Count) + " / " + startingBagAmount + ")");
 
 
 		Destroy(bag.gameObject);
