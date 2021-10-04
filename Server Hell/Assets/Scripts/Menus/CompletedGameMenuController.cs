@@ -49,11 +49,11 @@ public class CompletedGameMenuController : MenuButtonController
 
         public InputAction testDecreaseStability;
 
-        public int stabilityIncrement = 10;
+		public int stabilityIncrement = 10;
 
-    #endif
+#endif
 
-    protected override void Awake()
+	protected override void Awake()
     {
         base.Awake();
 
@@ -154,7 +154,9 @@ protected override void OnDisable()
         }
     }
 
-    public void IncreaseStability(InputAction.CallbackContext obj)
+#if UNITY_EDITOR
+
+	public void IncreaseStability(InputAction.CallbackContext obj)
     {
         if(stabilityMeter)
         {
@@ -170,7 +172,9 @@ protected override void OnDisable()
         }
     }
 
-    protected void ListObjectives()
+#endif
+
+	protected void ListObjectives()
     {
         List<TaskManager.TaskLabelCount> routineTasks = taskManager.routineTaskGroup;
 
