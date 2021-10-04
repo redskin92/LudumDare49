@@ -61,6 +61,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: 73e70d9276e9acf4ebe98986287bdbd3, type: 3}
   - {fileID: 2800000, guid: 3ac4094f94936c944bdb561d32c2a56d, type: 3}
   - {fileID: 2800000, guid: 8dbf7be518bbb354097abc57d0909592, type: 3}
+  - {fileID: 2800000, guid: 49d6799689509eb489052d696c5df0a0, type: 3}
   emailTexture: {fileID: 2800000, guid: 522c78ed7f9195b4da4b40d01bf179e4, type: 3}
   minimapIndicator: {fileID: 8314889428952977276}
 --- !u!65 &6645543739054224028
