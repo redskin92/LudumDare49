@@ -12,8 +12,11 @@ public class PlayerPause : MonoBehaviour
 
     private void Start()
     {
-        PauseMenuController.Instance.GamePaused += PauseMenu_GamePaused;
-        PauseMenuController.Instance.GameUnpaused += PauseMenu_GameUnpaused;
+        if (PauseMenuController.Instance != null)
+        {
+            PauseMenuController.Instance.GamePaused += PauseMenu_GamePaused;
+            PauseMenuController.Instance.GameUnpaused += PauseMenu_GameUnpaused;
+        }
     }
 
     private void OnDestroy()

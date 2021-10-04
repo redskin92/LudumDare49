@@ -14,6 +14,7 @@ public class LeakTask : UrgentTaskBase
     private bool interactionStarted;
 
     private ParticleSystem waterSprayParticles;
+    private AudioSource audioSource;
 
     public override void ActivateTask()
     {
@@ -22,6 +23,7 @@ public class LeakTask : UrgentTaskBase
 
         holdInteractable.Interactable = true;
         waterSprayParticles.Play();
+        audioSource.Play();
         
         minimapIndicator.SetActive(true);
 
@@ -33,6 +35,7 @@ public class LeakTask : UrgentTaskBase
         CancelInvoke("Fail");
         holdInteractable.Interactable = false;
         waterSprayParticles.Stop();
+        audioSource.Stop();
         minimapIndicator.SetActive(false);
     }
 
@@ -40,6 +43,7 @@ public class LeakTask : UrgentTaskBase
     {
         holdInteractable = GetComponent<HoldInteractable>();
         waterSprayParticles = GetComponentInChildren<ParticleSystem>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()

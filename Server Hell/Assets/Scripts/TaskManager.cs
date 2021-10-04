@@ -82,6 +82,9 @@ public class TaskManager : MonoBehaviour
 
         for (int i = 0; i < numEmailTasks; i++)
         {
+            if (i >= emailTasks.Count)
+                break;
+
             int index = UnityEngine.Random.Range(0, emailTasks.Count());
 
             routineTasks.Add(emailTasks[index]);
