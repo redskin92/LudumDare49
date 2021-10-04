@@ -15,7 +15,7 @@ public class ScreenColorAdjustmentEffect : StabilityEffect
 
     protected override void DoInitialize()
     {
-        // Destroy if attached volume doesn't have film grain effect.
+        // Destroy if attached volume doesn't have color adjustment effect.
         if (!volume.sharedProfile.TryGet(out colorAdjustments)) Destroy(this);
 
         if (colorAdjustments != null)
