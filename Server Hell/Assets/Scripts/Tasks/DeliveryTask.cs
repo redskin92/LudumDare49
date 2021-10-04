@@ -53,7 +53,15 @@ public class DeliveryTask : TaskBase
 
         if (objectToDeliver != null)
         {
-            parcel = Instantiate(objectToDeliver, transform);
+            GameObject objParent = new GameObject("DeliverParent");
+
+            objParent.transform.parent = this.transform;
+
+            objParent.transform.SetPositionAndRotation(current_SpawnLocation.position, Quaternion.identity);
+
+            parcel = Instantiate(objectToDeliver, objParent.transform);
+
+            parcel.transform.SetParent(objParent.transform);
 
             DeliveryObject deliveryObject = parcel.GetComponent<DeliveryObject>();
             if(deliveryObject == null)
@@ -64,7 +72,15 @@ public class DeliveryTask : TaskBase
 
         if (desitnation_Indicator != null)
         {
-            landing = Instantiate(desitnation_Indicator, transform);
+            GameObject DropOffParent = new GameObject("DropOffParent");
+
+            DropOffParent.transform.parent = this.transform;
+
+            DropOffParent.transform.SetPositionAndRotation(current_Destination.position, Quaternion.identity);
+
+            landing = Instantiate(desitnation_Indicator, DropOffParent.transform);
+
+            landing.transform.SetParent(DropOffParent.transform);
 
             DeliveryLocation deliveryLocation = landing.GetComponent<DeliveryLocation>();
             deliveryLocation.EnableMinimapIndicator(false);
