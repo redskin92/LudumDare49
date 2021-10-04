@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Random = System.Random;
 
 public class DeliveryTask : TaskBase
 {
@@ -37,8 +36,6 @@ public class DeliveryTask : TaskBase
     private GameObject landing;
     private GameObject parcel;
 
-    private readonly Random rand = new Random();
-
 
     public override void ActivateTask()
     {
@@ -48,8 +45,8 @@ public class DeliveryTask : TaskBase
 
     private void Spawn()
     {
-        current_SpawnLocation = object_SpawnLocations[rand.Next(object_SpawnLocations.Count)];
-        current_Destination = object_Destinations[rand.Next(object_Destinations.Count)];
+        current_SpawnLocation = object_SpawnLocations[Random.Range(0, object_SpawnLocations.Count)];
+        current_Destination = object_Destinations[Random.Range(0, object_Destinations.Count)];
 
         if (objectToDeliver != null)
         {
@@ -83,7 +80,7 @@ public class DeliveryTask : TaskBase
             landing.transform.SetParent(DropOffParent.transform);
 
             DeliveryLocation deliveryLocation = landing.GetComponent<DeliveryLocation>();
-            deliveryLocation.EnableMinimapIndicator(false);
+            deliveryLocation.EnableIndicators(false);
 
             parcel.GetComponent<DeliveryObject>().SetDestination(landing);
         }
@@ -92,7 +89,7 @@ public class DeliveryTask : TaskBase
     protected virtual void PackageDelivered(DeliveryObject pak)
     {
         parcel.GetComponent<DeliveryObject>().ObjectDeliveredEvent -= PackageDelivered;
-        Destroy(parcel);
+        //Destroy(parcel);
         Destroy(landing);
         FireTaskComplete();
     }

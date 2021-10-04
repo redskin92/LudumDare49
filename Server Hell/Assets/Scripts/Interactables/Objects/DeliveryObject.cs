@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +9,9 @@ public class DeliveryObject : EquipInteractable
     public GameObject dest;
     public event Action<DeliveryObject> ObjectDeliveredEvent;
 
-    protected DeliveryLocation deliveryLocation;
+	[SerializeField] private AudioSource successAudio;
+
+	protected DeliveryLocation deliveryLocation;
 
     public void SetDestination(GameObject destination)
     {
@@ -23,23 +23,26 @@ public class DeliveryObject : EquipInteractable
     {
         base.DropItem(force);
         
-        deliveryLocation.EnableMinimapIndicator(false);
+        deliveryLocation.EnableIndicators(false);
     }
 
     public override void Interact(InputAction action)
     {
         base.Interact(action);
 
-        deliveryLocation.EnableMinimapIndicator(true);
+        deliveryLocation.EnableIndicators(true);
     }
     
     // Start is called before the first frame update
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject != dest) return;
-        
-        Debug.Log("Firing the OBject Delivered Event ");
-        var done = ObjectDeliveredEvent;
+
+		successAudio.Play();
+
+		dest = null;
+
+		var done = ObjectDeliveredEvent;
 
         if (done != null)
             ObjectDeliveredEvent(this);
