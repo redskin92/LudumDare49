@@ -22,14 +22,20 @@ public class ButtonMainMenu : MenuButtons
         {
             PlayPressedSound();
 
-            if(loseGameMusic.source.isPlaying)
+            if (loseGameMusic)
             {
-                loseGameMusic.FadeSound();
+                if (loseGameMusic.source.isPlaying)
+                {
+                    loseGameMusic.FadeSound();
+                }
             }
 
-            if (winGameMusic.source.isPlaying)
+            if (winGameMusic)
             {
-                winGameMusic.FadeSound();
+                if (winGameMusic.source.isPlaying)
+                {
+                    winGameMusic.FadeSound();
+                }
             }
         }
         else
