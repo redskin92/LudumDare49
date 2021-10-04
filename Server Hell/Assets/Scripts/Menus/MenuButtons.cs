@@ -17,6 +17,27 @@ public class MenuButtons : MonoBehaviour
     [SerializeField]
     protected AdjustedAudioSource buttonSelectedSound;
 
+    [SerializeField]
+    protected Image buttonImage;
+
+    protected float startingImageAlpha;
+
+    protected float startingTextAlpha;
+
+    protected Color selectedColor = Color.green;
+
+    protected Color notSelectedColor = Color.red;
+
+    protected virtual void Awake()
+    {
+        if (buttonImage)
+        {
+            startingImageAlpha = buttonImage.color.a;
+
+            startingTextAlpha = buttonText.color.a;
+        }
+    }
+
     /// <summary>
     /// Do the action.
     /// </summary>
@@ -29,7 +50,24 @@ public class MenuButtons : MonoBehaviour
     /// </summary>
     public virtual void Selected(bool playSound = true)
     {
-        buttonText.color = Color.green;
+
+        if(buttonImage)
+        {
+            Color color = buttonImage.color;
+
+            color.a = 1.0f;
+
+            buttonImage.color = color;
+        }
+
+        if(buttonText)
+        {
+            Color color = selectedColor;
+
+            color.a = 1.0f;
+
+            buttonText.color = color;
+        }
     }
 
     /// <summary>
@@ -38,6 +76,24 @@ public class MenuButtons : MonoBehaviour
     public virtual void NotSelected()
     {
         buttonText.color = Color.red;
+
+        if (buttonImage)
+        {
+            Color color = buttonImage.color;
+
+            color.a = startingImageAlpha;
+
+            buttonImage.color = color;
+        }
+
+        if (buttonText)
+        {
+            Color color = notSelectedColor;
+
+            color.a = startingTextAlpha;
+
+            buttonText.color = color;
+        }
     }
 
     public void PlayPressedSound()

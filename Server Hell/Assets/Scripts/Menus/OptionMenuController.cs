@@ -23,14 +23,16 @@ public class OptionMenuController : MenuButtonController
 
     protected bool optionsActive = false;
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-
     protected override void OnEnable()
     {
         EnableButtons();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        optionsMenuBase.SetActive(optionsActive);
     }
 
     private void FixedUpdate()

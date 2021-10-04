@@ -93,7 +93,7 @@ public class SoundVolumeController : MonoBehaviour
 
         sound.source.volume = sound.originalVolume * musicScale;
 
-        sound.source.Play();
+        sound.FadeSoundIn();
 
         currentMusic = sound;
     }

@@ -19,7 +19,9 @@ public class ButtonAdjustVolume : MenuButtons
 
     protected float volume = 1.0f;
 
-    private void Awake()
+    protected float volumeAlphaStart;
+
+    protected virtual void Start()
     {
         if (SoundVolumeController.Instance)
         {
@@ -33,7 +35,14 @@ public class ButtonAdjustVolume : MenuButtons
             }
         }
 
-        volumeText.text = ((int)(volume * 100)).ToString();
+        if (volumeText)
+        {
+            UnityEngine.Debug.Log("StartVolume: " + volume);
+
+            volumeAlphaStart = volumeText.color.a;
+
+            volumeText.text = ((int)(volume * 100)).ToString();
+        }
     }
 
     public void LowerVolume()
@@ -69,6 +78,15 @@ public class ButtonAdjustVolume : MenuButtons
         base.Selected(playSound);
 
         controlsScemeParent.SetActive(true);
+
+        if (volumeText)
+        {
+            Color color = selectedColor;
+
+            color.a = 1.0f;
+
+            volumeText.color = color;
+        }
     }
 
     public override void NotSelected()
@@ -76,6 +94,15 @@ public class ButtonAdjustVolume : MenuButtons
         base.NotSelected();
 
         controlsScemeParent.SetActive(false);
+
+        if (volumeText)
+        {
+            Color color = notSelectedColor;
+
+            color.a = volumeAlphaStart;
+
+            volumeText.color = color;
+        }
     }
 
     protected void SetVolume()

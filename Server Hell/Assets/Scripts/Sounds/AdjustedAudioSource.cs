@@ -7,6 +7,8 @@ public class AdjustedAudioSource : MonoBehaviour
 
     public bool isMusic = false;
 
+    public bool playOnStart = false;
+
     public float fadeSoundTime = 0.5f;
 
     [HideInInspector]
@@ -15,11 +17,11 @@ public class AdjustedAudioSource : MonoBehaviour
     // Awake is called before the first frame update
     void Awake()
     {
-        if(!source)
+        if (!source)
         {
             source = GetComponent<AudioSource>();
 
-            if(!source)
+            if (!source)
             {
                 UnityEngine.Debug.LogError("Unable to grab AudioSource from object: " + gameObject.name);
             }
@@ -27,9 +29,14 @@ public class AdjustedAudioSource : MonoBehaviour
 
         originalVolume = source.volume;
 
-        if(isMusic)
+        if (SoundVolumeController.Instance)
         {
-            if (SoundVolumeController.Instance)
+            if (playOnStart)
+            {
+                SoundVolumeController.Instance.PlayMusic(this);
+
+            }
+            else if (isMusic)
             {
                 SoundVolumeController.Instance.SetMusic(this);
             }
@@ -56,10 +63,10 @@ public class AdjustedAudioSource : MonoBehaviour
 
     public void FadeSound()
     {
-        StartCoroutine(FadeSoundOverTime());
+        StartCoroutine(FadeSoundOutOverTime());
     }
 
-    private IEnumerator FadeSoundOverTime()
+    private IEnumerator FadeSoundOutOverTime()
     {
         float time = 0;
 
@@ -73,6 +80,29 @@ public class AdjustedAudioSource : MonoBehaviour
         }
 
         Stop();
+
+        yield return null;
+    }
+
+    public void FadeSoundIn()
+    {
+        StartCoroutine(FadeSoundInOverTime());
+    }
+
+    private IEnumerator FadeSoundInOverTime()
+    {
+        float time = 0;
+
+        float endingVolume = source.volume;
+
+        Play();
+
+        while (time < fadeSoundTime)
+        {
+            time += Time.deltaTime;
+            source.volume = endingVolume * (time / fadeSoundTime);
+            yield return null;
+        }
 
         yield return null;
     }
