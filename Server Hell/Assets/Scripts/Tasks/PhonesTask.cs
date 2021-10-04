@@ -6,6 +6,9 @@ public class PhonesTask : UrgentTaskBase
     public float timeBeforeFail = 10f;
     public GameObject lightObj;
 
+    [SerializeField]
+    private GameObject minimapIndicator;
+
     private ProgressMeter progressMeter;
 
     private HoldInteractable holdInteractable;
@@ -22,6 +25,7 @@ public class PhonesTask : UrgentTaskBase
         lightObj.SetActive(true);
 
         holdInteractable.Interactable = true;
+        minimapIndicator.SetActive(true); // TODO: Maybe turn on after some amount of time?
 
         InvokeRepeating("Fail", timeBeforeFail, timeBeforeFail);
     }
@@ -33,6 +37,7 @@ public class PhonesTask : UrgentTaskBase
         audioSource.Stop();
         lightObj.SetActive(false);
 
+        minimapIndicator.SetActive(false);
         holdInteractable.Interactable = false;
     }
 
@@ -47,6 +52,7 @@ public class PhonesTask : UrgentTaskBase
         progressMeter = FindObjectOfType<ProgressMeter>();
 
         holdInteractable.Interactable = false;
+        minimapIndicator.SetActive(false);
 
         RegisterEvents();
     }
