@@ -10,7 +10,7 @@ public class LevelManager : MonoBehaviour
     protected BackgroundFadeManager backgroundFadeManager;
 
     [SerializeField]
-    protected List<string> playScenesList;
+    protected string playSceneName;
 
     [SerializeField]
     protected string mainMenu;
@@ -18,11 +18,16 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     protected float fadeTime = 1.0f;
 
+    [SerializeField]
+    protected AudioListener listener;
+
     protected List<string> activeScenes;
 
     public event Action<LevelManager> TransitionComplete;
 
     bool loadMain = false;
+
+    string currentScene = string.Empty;
 
     private static LevelManager instance = null;
 
@@ -85,6 +90,8 @@ public class LevelManager : MonoBehaviour
 
         StartCoroutine("waitForSceneLoad", mainMenu);
 
+        currentScene = mainMenu;
+
         LoadSceneSafe(mainMenu);
     }
 
@@ -102,6 +109,8 @@ public class LevelManager : MonoBehaviour
 
     private void LoadInMainMenu()
     {
+        currentScene = mainMenu;
+
         LoadSceneSafe(mainMenu);
 
         StartCoroutine("waitForSceneLoad", mainMenu);
@@ -109,19 +118,11 @@ public class LevelManager : MonoBehaviour
 
     private void LoadInPlay()
     {
-        string topSceneName = string.Empty;
+        currentScene = playSceneName;
 
-        if (playScenesList.Count >= 1)
-        {
-            topSceneName = playScenesList[0];
-        }
+        LoadSceneSafe(playSceneName);
 
-        for (int i = 0; i < playScenesList.Count; ++i)
-        {
-            LoadSceneSafe(playScenesList[i]);
-        }
-
-        StartCoroutine("waitForSceneLoad", topSceneName);
+        StartCoroutine("waitForSceneLoad", playSceneName);
     }
 
     /// <summary>
@@ -190,6 +191,16 @@ public class LevelManager : MonoBehaviour
 
         backgroundFadeManager.FadeOutComplete += FadeOutCompleted;
         backgroundFadeManager.SetTimer(fadeTime, false);
+
+        if(currentScene.Equals(playSceneName))
+        {
+            UnityEngine.Debug.Log("LoadIn");
+            listener.enabled = false;
+        }
+        if (currentScene.Equals(mainMenu))
+        {
+            listener.enabled = true;
+        }
     }
 
     IEnumerator waitForSceneUnLoad(string sceneName)
