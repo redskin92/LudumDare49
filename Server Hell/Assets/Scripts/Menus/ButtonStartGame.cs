@@ -9,11 +9,16 @@ using UnityEngine;
 
 public class ButtonStartGame : MenuButtons
 {
+    [SerializeField]
+    protected AdjustedAudioSource mainMenuMusic;
+
     /// <summary>
     /// Start the game!
     /// </summary>
     public override void PressButton()
     {
+        mainMenuMusic.FadeSound();
+
         PlayPressedSound();
         LevelManager.Instance.TransitionToPlay();
     }

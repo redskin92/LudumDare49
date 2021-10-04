@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AdjustedAudioSource : MonoBehaviour
@@ -5,6 +6,8 @@ public class AdjustedAudioSource : MonoBehaviour
     public AudioSource source;
 
     public bool isMusic = false;
+
+    public float fadeSoundTime = 0.5f;
 
     [HideInInspector]
     public float originalVolume;
@@ -47,5 +50,30 @@ public class AdjustedAudioSource : MonoBehaviour
         {
             source.Stop();
         }
+
+        StopAllCoroutines();
+    }
+
+    public void FadeSound()
+    {
+        StartCoroutine(FadeSoundOverTime());
+    }
+
+    private IEnumerator FadeSoundOverTime()
+    {
+        float time = 0;
+
+        float startingVolume = source.volume;
+
+        while (time < fadeSoundTime)
+        {
+            time += Time.deltaTime;
+            source.volume = startingVolume * ((fadeSoundTime - time) / fadeSoundTime);
+            yield return null;
+        }
+
+        Stop();
+
+        yield return null;
     }
 }

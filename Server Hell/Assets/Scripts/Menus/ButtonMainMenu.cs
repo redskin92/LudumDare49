@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ButtonMainMenu : MenuButtons
 {
+    [SerializeField]
+    protected AdjustedAudioSource loseGameMusic;
+
+    [SerializeField]
+    protected AdjustedAudioSource winGameMusic;
+
     /// <summary>
     /// Enter options!
     /// </summary>
@@ -15,6 +21,16 @@ public class ButtonMainMenu : MenuButtons
         if (SoundVolumeController.Instance)
         {
             PlayPressedSound();
+
+            if(loseGameMusic.source.isPlaying)
+            {
+                loseGameMusic.FadeSound();
+            }
+
+            if (winGameMusic.source.isPlaying)
+            {
+                winGameMusic.FadeSound();
+            }
         }
         else
         {

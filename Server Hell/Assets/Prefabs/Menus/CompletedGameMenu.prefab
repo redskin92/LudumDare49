@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 9057361326545029464}
   isMusic: 1
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!82 &9057361326545029464
 AudioSource:
@@ -596,6 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 6236000091496093272}
   isMusic: 0
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!82 &6236000091496093272
 AudioSource:
@@ -2143,6 +2145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 7733365811766757810}
   isMusic: 0
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!82 &7733365811766757810
 AudioSource:
@@ -2578,6 +2581,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buttonText: {fileID: 7733365811754179755}
   buttonSelectedSound: {fileID: 7733365811766757821}
+  loseGameMusic: {fileID: 1126344729697272753}
+  winGameMusic: {fileID: 8895543771371022640}
 --- !u!1 &7733365812878345992
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,6 +2629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 7733365812878345994}
   isMusic: 0
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!82 &7733365812878345994
 AudioSource:
@@ -3226,6 +3232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 7381332612926790406}
   isMusic: 1
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!82 &7381332612926790406
 AudioSource:
