@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3853ed7dcf826484ab7e3bac598a4be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionName: Hold 'E' to answer phones
+  interactionName: Hold 'E' to answer phone
   timeToComplete: 5
 --- !u!114 &4836270973908026790
 MonoBehaviour:
@@ -209,6 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 0}
   isMusic: 0
+  playOnStart: 0
+  fadeSoundTime: 0.5
   originalVolume: 0
 --- !u!1 &5285335468010025903
 GameObject:
