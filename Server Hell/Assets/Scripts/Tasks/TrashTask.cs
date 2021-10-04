@@ -15,9 +15,16 @@ public class TrashTask : TaskBase
 	// Start is called before the first frame update
 	void Start()
     {
+		UpdateTaskName("Throw away trash (0/ " + startingBagAmount + ")");
+
+	}
+
+	public override void ActivateTask()
+	{
+
 		List<Transform> availLocations = new List<Transform>(trashSpawnLocations);
 
-		for(int i = 0; i < startingBagAmount; ++i)
+		for (int i = 0; i < startingBagAmount; ++i)
 		{
 			var spawnLocation = availLocations[Random.Range(0, availLocations.Count)];
 			availLocations.Remove(spawnLocation);
@@ -27,7 +34,7 @@ public class TrashTask : TaskBase
 			bag.TrashThrownAway += TrashProcessed;
 		}
 
-		UpdateTaskName("Throw away trash (" + (startingBagAmount - trashBags.Count) + " / " + startingBagAmount + ")");
+		base.ActivateTask();
 	}
 
 
