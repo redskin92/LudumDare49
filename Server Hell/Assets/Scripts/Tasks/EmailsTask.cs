@@ -40,11 +40,10 @@ public class EmailsTask : TaskBase
         computerHold.ProgressCanceled += ComputerHold_ProgressCanceled;
     }
 
-    private void Start()
-    {
-        progressMeter = FindObjectOfType<ProgressMeter>();
-        minimapIndicator.SetActive(false);
-    }
+	private void Start()
+	{
+		progressMeter = FindObjectOfType<ProgressMeter>();
+	}
 
     private void OnDestroy()
     {
