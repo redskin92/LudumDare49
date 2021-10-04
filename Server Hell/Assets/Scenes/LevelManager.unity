@@ -750,6 +750,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4653483789131869080, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4653483789131869083, guid: 083fe5abd1bd4df40a0cd3d8f66221a1,
         type: 3}
       propertyPath: m_LocalRotation.x

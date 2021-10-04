@@ -11,6 +11,7 @@ public class ButtonReplayGame : MenuButtons
     {
         PlayPressedSound();
 
-        //TODO restart the game here
+        if(LevelManager.Instance)
+            LevelManager.Instance.TransitionToPlay();
     }
 }
