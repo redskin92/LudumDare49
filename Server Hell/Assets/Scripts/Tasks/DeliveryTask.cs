@@ -69,7 +69,6 @@ public class DeliveryTask : TaskBase
             DeliveryLocation deliveryLocation = landing.GetComponent<DeliveryLocation>();
             deliveryLocation.EnableMinimapIndicator(false);
 
-            parcel.GetComponent<DeliveryObject>().dest = landing;
             parcel.GetComponent<DeliveryObject>().SetDestination(landing);
         }
     }

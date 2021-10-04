@@ -15,7 +15,6 @@ public class DeliveryObject : EquipInteractable
 
     public void SetDestination(GameObject destination)
     {
-        Debug.Log(string.Format("DeliveryObject::SetDestination Line(18) - destination: {0}", destination, this));
         dest = destination;
         deliveryLocation = dest.GetComponent<DeliveryLocation>();
     }
