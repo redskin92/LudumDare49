@@ -15,10 +15,25 @@ public class Trashbag : EquipInteractable
 
 		if (other.gameObject.name == "TrashChute")
 		{
-			if (TrashThrownAway != null)
-				TrashThrownAway(this);
-
-			processed = true;
+			FireThrownAway();
 		}
+	}
+
+	private void Update()
+	{
+		if (processed) return;
+
+		if(this.transform.position.y < -20f)
+		{
+			FireThrownAway();
+		}
+	}
+
+	private void FireThrownAway()
+	{
+		if (TrashThrownAway != null)
+			TrashThrownAway(this);
+
+		processed = true;
 	}
 }
