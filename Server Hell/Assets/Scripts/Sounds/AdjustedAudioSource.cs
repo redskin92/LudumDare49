@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AdjustedAudioSource : MonoBehaviour
@@ -16,9 +14,6 @@ public class AdjustedAudioSource : MonoBehaviour
     {
         if(!source)
         {
-            UnityEngine.Debug.LogWarning("AudioSource attachment missing from object: " + gameObject.name);
-            UnityEngine.Debug.LogWarning("Attempting GetComponent on this object.");
-
             source = GetComponent<AudioSource>();
 
             if(!source)

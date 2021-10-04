@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,12 +6,24 @@ using UnityEngine.InputSystem;
 
 public class PauseMenuController : MenuButtonController
 {
+    public static PauseMenuController Instance { get; private set; }
+
     [SerializeField]
     protected GameObject pauseMenuBase;
 
     public InputAction togglePause;
 
     protected bool active = false;
+
+    public event Action GamePaused;
+    public event Action GameUnpaused;
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        Instance = this;
+    }
 
     protected override void OnEnable()
     {
@@ -40,11 +53,17 @@ public class PauseMenuController : MenuButtonController
         {
             pauseMenuBase.SetActive(true);
             RegisterButtons();
+
+            if (GamePaused != null)
+                GamePaused();
         }
         else
         {
             UnRegisterButtons();
             pauseMenuBase.SetActive(false);
+
+            if (GameUnpaused != null)
+                GameUnpaused();
         }
     }
 }
