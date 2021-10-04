@@ -41,9 +41,17 @@ public class PlayerInteract : MonoBehaviour
 
     private void Update()
     {
-        RaycastHit[] hits = Physics.RaycastAll(cameraT.position, cameraT.forward, interactDistance);
-
-        curInteractable = FindInteractable(hits);
+        RaycastHit info;
+        curInteractable = null;
+        if (Physics.Raycast(cameraT.position, cameraT.forward, out info, interactDistance))
+        {
+            if (info.collider.transform.tag == "Interactable")
+            {
+                var comp = info.collider.GetComponent<IInteractable>();
+                if (comp != null && comp.Interactable)
+                    curInteractable = comp;
+            }
+        }
 
         if (curInteractable != null)
         {
@@ -67,31 +75,6 @@ public class PlayerInteract : MonoBehaviour
             curInteractable.Interact(interactAction);
         else
             Debug.Log("No targets!");
-    }
-
-    /// <summary>
-    /// Find the first interactable object in the list of things hit.
-    /// </summary>
-    /// <param name="hits">Array of raycasted objects.</param>
-    /// <returns>The first interactable object raycasted, or null if not found.</returns>
-    private IInteractable FindInteractable(RaycastHit[] hits)
-    {
-        IInteractable interactable = null;
-
-        for (int i = 0; i < hits.Length; i++)
-        {
-            if (hits[i].transform.tag == "Interactable")
-            {
-                var comp = hits[i].transform.GetComponent<IInteractable>();
-                if (comp != null && comp.Interactable)
-                {
-                    interactable = comp;
-                    break;
-                }
-            }
-        }
-
-        return interactable;
     }
 
     private void InteractAction_started(InputAction.CallbackContext obj)
