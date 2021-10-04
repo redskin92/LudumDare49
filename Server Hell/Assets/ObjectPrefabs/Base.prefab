@@ -128,19 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapIndicator: {fileID: 123277991368868021}
---- !u!114 &1241096695
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4111473708553503049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a6b49809eae1df44875fee9bd07eb16, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isReverse: 1
 --- !u!1 &5681981311654545756
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,12 +292,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca1c2883f74349b47852cc5c00caea0a, type: 3}
---- !u!1 &4111473708553503049 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 730274718908892946, guid: ca1c2883f74349b47852cc5c00caea0a,
-    type: 3}
-  m_PrefabInstance: {fileID: 3687488707380889179}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4111473708553503045 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 730274718908892958, guid: ca1c2883f74349b47852cc5c00caea0a,
