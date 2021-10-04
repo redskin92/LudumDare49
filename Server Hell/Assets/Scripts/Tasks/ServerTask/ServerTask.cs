@@ -14,6 +14,10 @@ public class ServerTask : UrgentTaskBase
 	[SerializeField]
 	private GameObject minimapIndicator;
 
+	[SerializeField] private AudioSource serverFail;
+	[SerializeField] private AudioSource serverRepair;
+
+
 	private List<ServerLight> lights = new List<ServerLight>();
     private ProgressMeter progressMeter;
     private bool interactionStarted;
@@ -85,6 +89,8 @@ public class ServerTask : UrgentTaskBase
 		minimapIndicator.SetActive(true);
 
 		serverIteractable.Interactable = true;
+
+		serverFail.Play();
 	}
 
 	private void ServerRepaired()
@@ -99,6 +105,8 @@ public class ServerTask : UrgentTaskBase
 
 		foreach (var light in lights)
 			light.SetLightStatus(true);
+
+		serverRepair.Play();
 	}
 
 
