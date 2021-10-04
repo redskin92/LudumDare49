@@ -29,7 +29,7 @@ public class TaskManager : MonoBehaviour
     public List<UrgentTaskBase> urgentTasks = new List<UrgentTaskBase>();
 
     public List<TaskLabelCount> routineTaskGroup = new List<TaskLabelCount>();
-    private List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
+    public List<TaskLabelCount> urgentTaskGroup = new List<TaskLabelCount>();
 
     private int completedTasks;
     private int tasksToComplete;
@@ -43,7 +43,7 @@ public class TaskManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    protected virtual void Start()
     {
         FindAndAssignTasks();
 
@@ -186,7 +186,7 @@ public class TaskManager : MonoBehaviour
         prevTask = task.taskName;
     }
 
-    private void SpawnTaskDisplayUI(RectTransform parent, TaskBase task)
+    protected void SpawnTaskDisplayUI(RectTransform parent, TaskBase task)
     {
         var group = routineTaskGroup.FirstOrDefault(x => x.task.taskName == task.taskName);
         if (group == null)

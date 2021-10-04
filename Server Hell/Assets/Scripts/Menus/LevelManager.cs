@@ -16,6 +16,9 @@ public class LevelManager : MonoBehaviour
     protected string mainMenu;
 
     [SerializeField]
+    protected string tutorialName;
+
+    [SerializeField]
     protected float fadeTime = 1.0f;
 
     [SerializeField]
@@ -26,6 +29,7 @@ public class LevelManager : MonoBehaviour
     public event Action<LevelManager> TransitionComplete;
 
     bool loadMain = false;
+    bool loadTut = false;
 
     string currentScene = string.Empty;
 
@@ -87,6 +91,7 @@ public class LevelManager : MonoBehaviour
     public void LoadInitialScenes()
     {
         loadMain = true;
+        loadTut = false;
 
         StartCoroutine("waitForSceneLoad", mainMenu);
 
@@ -98,11 +103,20 @@ public class LevelManager : MonoBehaviour
     public void TransitionToMain()
     {
         loadMain = true;
+        loadTut = false;
         StartTransition();
     }
 
     public void TransitionToPlay()
     {
+        loadMain = false;
+        loadTut = false;
+        StartTransition();
+    }
+
+    public void TransitionToTutorial()
+    {
+        loadTut = true;
         loadMain = false;
         StartTransition();
     }
@@ -123,6 +137,15 @@ public class LevelManager : MonoBehaviour
         LoadSceneSafe(playSceneName);
 
         StartCoroutine("waitForSceneLoad", playSceneName);
+    }
+
+    private void LoadInTutorial()
+    {
+        currentScene = playSceneName;
+
+        LoadSceneSafe(tutorialName);
+
+        StartCoroutine("waitForSceneLoad", tutorialName);
     }
 
     /// <summary>
@@ -212,6 +235,10 @@ public class LevelManager : MonoBehaviour
         if (loadMain)
         {
             LoadInMainMenu();
+        }
+        else if (loadTut)
+        {
+            LoadInTutorial();
         }
         else
         {

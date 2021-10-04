@@ -678,6 +678,7 @@ MonoBehaviour:
   backgroundFadeManager: {fileID: 648925607}
   playSceneName: OfficeScene
   mainMenu: MainMenu
+  tutorialName: Tutorial
   fadeTime: 1
   listener: {fileID: 1288507731}
 --- !u!4 &1837216080
