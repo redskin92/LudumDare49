@@ -53,6 +53,18 @@ public class HoldInteractable : MonoBehaviour, IInteractable
         playerInput = player.GetComponent<PlayerInput>();
     }
 
+    private void Start()
+    {
+        TaskManager.Instance.TasksCompleted += TaskManager_TasksCompleted;
+        StabilityMeter.Instance.MinStabilityReached += StabilityMeter_MinStabilityReached;
+    }
+
+    private void OnDestroy()
+    {
+        if (TaskManager.Instance != null)
+            TaskManager.Instance.TasksCompleted -= TaskManager_TasksCompleted;
+    }
+
     private IEnumerator StartInteractionSequence(InputAction action)
     {
         float time = 0;
@@ -86,5 +98,15 @@ public class HoldInteractable : MonoBehaviour, IInteractable
 
         if (ProgressCanceled != null)
             ProgressCanceled();
+    }
+
+    private void TaskManager_TasksCompleted()
+    {
+        StopAllCoroutines();
+    }
+
+    private void StabilityMeter_MinStabilityReached()
+    {
+        StopAllCoroutines();
     }
 }
