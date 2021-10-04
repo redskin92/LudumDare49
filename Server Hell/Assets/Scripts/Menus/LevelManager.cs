@@ -194,7 +194,6 @@ public class LevelManager : MonoBehaviour
 
         if(currentScene.Equals(playSceneName))
         {
-            UnityEngine.Debug.Log("LoadIn");
             listener.enabled = false;
         }
         if (currentScene.Equals(mainMenu))
