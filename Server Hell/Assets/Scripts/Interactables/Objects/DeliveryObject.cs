@@ -9,6 +9,7 @@ public class DeliveryObject : EquipInteractable
     public GameObject dest;
     public event Action<DeliveryObject> ObjectDeliveredEvent;
 
+	[SerializeField] private GameObject minimapIndicator;
 	[SerializeField] private AudioSource successAudio;
 
 	protected DeliveryLocation deliveryLocation;
@@ -22,15 +23,16 @@ public class DeliveryObject : EquipInteractable
     public override void DropItem(Vector3 force)
     {
         base.DropItem(force);
-        
-        deliveryLocation.EnableIndicators(false);
+		minimapIndicator.SetActive(true);
+		deliveryLocation.EnableIndicators(false);
     }
 
     public override void Interact(InputAction action)
     {
         base.Interact(action);
 
-        deliveryLocation.EnableIndicators(true);
+		minimapIndicator.SetActive(false);
+		deliveryLocation.EnableIndicators(true);
     }
     
     // Start is called before the first frame update
@@ -41,7 +43,8 @@ public class DeliveryObject : EquipInteractable
 		successAudio.Play();
 
 		dest = null;
-
+		minimapIndicator.SetActive(false);
+			   
 		var done = ObjectDeliveredEvent;
 
         if (done != null)

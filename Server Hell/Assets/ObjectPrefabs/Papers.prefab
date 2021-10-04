@@ -195,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactionName: Press 'E' to Equip
   dest: {fileID: 0}
+  minimapIndicator: {fileID: 3454060087033460860}
   successAudio: {fileID: 7270944358754104974}
 --- !u!54 &816053680418709867
 Rigidbody:
@@ -322,5 +323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source: {fileID: 7270944358754104974}
   isMusic: 0
+  playOnStart: 0
   fadeSoundTime: 0.5
   originalVolume: 0

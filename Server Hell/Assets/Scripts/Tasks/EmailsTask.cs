@@ -43,7 +43,7 @@ public class EmailsTask : TaskBase
     private void Start()
     {
         progressMeter = FindObjectOfType<ProgressMeter>();
-        minimapIndicator.SetActive(IsActive);
+        minimapIndicator.SetActive(false);
     }
 
     private void OnDestroy()
@@ -68,7 +68,7 @@ public class EmailsTask : TaskBase
 
 		computerHold.Interactable = true;
 		
-		minimapIndicator.SetActive(true);
+		//minimapIndicator.SetActive(true);
 
 		UpdateTexture(true);
 	}

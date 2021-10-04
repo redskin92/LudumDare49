@@ -25,7 +25,7 @@ public class ServerTask : UrgentTaskBase
 	private void Start()
 	{
 		progressMeter = FindObjectOfType<ProgressMeter>();
-		minimapIndicator.SetActive(IsActive);
+		minimapIndicator.SetActive(false);
 	}
 
 	public void Awake()
@@ -86,7 +86,7 @@ public class ServerTask : UrgentTaskBase
 		foreach (var light in lights)
 			light.SetLightStatus(false);
 		
-		minimapIndicator.SetActive(true);
+		//minimapIndicator.SetActive(true);
 
 		serverIteractable.Interactable = true;
 
