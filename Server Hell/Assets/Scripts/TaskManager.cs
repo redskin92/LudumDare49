@@ -6,6 +6,8 @@ using TMPro;
 
 public class TaskManager : MonoBehaviour
 {
+    public static TaskManager Instance { get; private set; }
+
     public RectTransform routineTasksDisplayParent, urgentTasksDisplayParent;
     public GameObject taskNameDisplayPrefab;
 
@@ -35,6 +37,11 @@ public class TaskManager : MonoBehaviour
     private string prevTask = string.Empty;
 
     public event Action TasksCompleted;
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class StabilityMeter : MonoBehaviour
 {
-    public static StabilityMeter Instance;
+    public static StabilityMeter Instance { get; private set; }
 
     [SerializeField]
     private int stability = 100;
