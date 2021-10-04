@@ -6,6 +6,7 @@ public class FireOutbreakTask : UrgentTaskBase
 {
 	[SerializeField] private FireObject firePefab;
 	[SerializeField] private List<Transform> fireSpawnLocations;
+	[SerializeField] private FireAlarm fireAlarm;
 
 	[SerializeField] private int minFireSpawnInterval = 20;
 	[SerializeField] private int maxFireSpawnInterval = 40;
@@ -22,6 +23,7 @@ public class FireOutbreakTask : UrgentTaskBase
 		activeFires.Clear();
 		availableSpawnLocations = new List<Transform>(fireSpawnLocations);
 		SpawnFire();
+		fireAlarm.SetAlarmStatus(true);
 		base.ActivateTask();
 	}
 
@@ -74,6 +76,9 @@ public class FireOutbreakTask : UrgentTaskBase
 	private void CheckForTaskComplete()
 	{
 		if (activeFires.Count <= 0)
+		{
+			fireAlarm.SetAlarmStatus(false);
 			FireTaskComplete();
+		}
 	}
 }
