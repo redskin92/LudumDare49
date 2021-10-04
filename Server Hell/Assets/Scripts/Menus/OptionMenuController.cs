@@ -16,6 +16,13 @@ public class OptionMenuController : MenuButtonController
 
     protected MenuButtonController baseMenuButtonController = null;
 
+    public InputAction backOut;
+
+    [SerializeField]
+    protected MenuButtons exitOptionsButton;
+
+    protected bool optionsActive = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -55,6 +62,8 @@ public class OptionMenuController : MenuButtonController
 
         optionsMenuBase.SetActive(true);
 
+        optionsActive = true;
+
         buttonIndex = 0;
 
         UpdateSelectedButton();
@@ -70,7 +79,9 @@ public class OptionMenuController : MenuButtonController
 
         optionsMenuBase.SetActive(false);
 
-        if(baseMenuButtonController)
+        optionsActive = false;
+
+        if (baseMenuButtonController)
         {
             baseMenuButtonController.RegisterButtons();
             baseMenuButtonController = null;
@@ -83,6 +94,7 @@ public class OptionMenuController : MenuButtonController
 
         lowerVolume.Enable();
         raiseVolume.Enable();
+        backOut.Enable();
     }
 
     public override void RegisterButtons()
@@ -91,6 +103,8 @@ public class OptionMenuController : MenuButtonController
 
         lowerVolume.started += Lower_Volume;
         raiseVolume.started += Raise_Volume;
+
+        backOut.started += BackOut;
     }
 
     public override void UnRegisterButtons()
@@ -99,6 +113,8 @@ public class OptionMenuController : MenuButtonController
 
         lowerVolume.started -= Lower_Volume;
         raiseVolume.started -= Raise_Volume;
+
+        backOut.started -= BackOut;
     }
 
     protected override void UpdateSelectedButton(bool playSounds = true)
@@ -127,6 +143,16 @@ public class OptionMenuController : MenuButtonController
         {
             currentVolumeState = -1;
             lowerVolume.canceled += StopAdjustingVolume;
+        }
+    }
+
+    private void BackOut(InputAction.CallbackContext obj)
+    {
+        if(exitOptionsButton && optionsActive)
+        {
+            UnRegisterButtons();
+
+            exitOptionsButton.PressButton();
         }
     }
 

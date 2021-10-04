@@ -54,4 +54,9 @@ public class MenuButtons : MonoBehaviour
             }
         }
     }
+
+    public void DisableButton()
+    {
+
+    }
 }
