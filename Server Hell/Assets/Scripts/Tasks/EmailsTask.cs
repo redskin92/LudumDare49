@@ -11,6 +11,9 @@ public class EmailsTask : TaskBase
 	[SerializeField]
 	private Texture2D emailTexture;
 
+	[SerializeField]
+	private GameObject minimapIndicator;
+
     private ProgressMeter progressMeter;
     private MeshRenderer meshRenderer;
 
@@ -40,6 +43,7 @@ public class EmailsTask : TaskBase
     private void Start()
     {
         progressMeter = FindObjectOfType<ProgressMeter>();
+        minimapIndicator.SetActive(false);
     }
 
     private void OnDestroy()
@@ -63,6 +67,8 @@ public class EmailsTask : TaskBase
 		base.ActivateTask();
 
 		computerHold.Interactable = true;
+		
+		minimapIndicator.SetActive(true);
 
 		UpdateTexture(true);
 	}
@@ -79,6 +85,8 @@ public class EmailsTask : TaskBase
 		computerHold.Interactable = false;
         progressMeter.ProgressComplete();
 		FireTaskComplete();
+		
+		minimapIndicator.SetActive(false);
 
 		UpdateTexture(false);
     }
