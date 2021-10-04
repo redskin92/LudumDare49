@@ -302,7 +302,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9be81783f359c354486643be9d4c442d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -446,6 +446,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7243619798959911521}
+  - component: {fileID: 5209921667947836011}
+  - component: {fileID: 1167818085744936162}
   m_Layer: 0
   m_Name: CeilingLight
   m_TagString: Untagged
@@ -470,6 +472,103 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5209921667947836011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243619798959911520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73af203700402a54c8d7a58cb1272093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightbulbRenderers:
+  - {fileID: 7243619798744733370}
+  - {fileID: 7243619799704290308}
+  - {fileID: 7243619799452793818}
+  lights:
+  - {fileID: 7243619799638619584}
+  - {fileID: 7243619799717349515}
+  startingIntensity: 1
+--- !u!114 &1167818085744936162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7243619798959911520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 426db4b15213a0241911f652be7f729c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerThreshold: 100
+  ceilingLight: {fileID: 5209921667947836011}
+  flickerCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -0.00776138
+      outSlope: -0.00776138
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.19999146
+      value: 0.0047310255
+      inSlope: -2.9549968
+      outSlope: -2.9549968
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.40731004
+    - serializedVersion: 3
+      time: 0.2920882
+      value: 0.80785894
+      inSlope: 3.7383003
+      outSlope: 3.7383003
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.45417312
+      value: 0.2853385
+      inSlope: 2.4670663
+      outSlope: 2.4670663
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.16868232
+    - serializedVersion: 3
+      time: 0.79999596
+      value: 0.0070668347
+      inSlope: -1.5368713
+      outSlope: -1.5368713
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.25297862
+      outWeight: 1
+    - serializedVersion: 3
+      time: 1.0000143
+      value: 1.0047157
+      inSlope: 0.0048193
+      outSlope: 0.0048193
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  minTimeBetweenFlickers: 5
+  maxTimeBetweenFlickers: 20
+  sequenceDuration: 1
 --- !u!1 &7243619799452793799
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +628,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9be81783f359c354486643be9d4c442d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -736,7 +835,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 9be81783f359c354486643be9d4c442d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
