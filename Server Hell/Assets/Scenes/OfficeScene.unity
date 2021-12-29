@@ -8910,6 +8910,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
         type: 3}
+      propertyPath: extinquishers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: extinquishers.Array.data[0]
+      value: 
+      objectReference: {fileID: 871350927}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: extinquishers.Array.data[1]
+      value: 
+      objectReference: {fileID: 468042529}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
       propertyPath: fireSpawnLocations.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -15204,6 +15219,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 467625731}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &468042529 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2360606177439398367, guid: 9dac18a402e418e439f028de779cbc7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1416537029}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b896c6bc1e465e4b863d6366ee0eae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &468199301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26510,6 +26537,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 866835160}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &871350927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2360606177439398367, guid: 9dac18a402e418e439f028de779cbc7e,
+    type: 3}
+  m_PrefabInstance: {fileID: 520803305}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b896c6bc1e465e4b863d6366ee0eae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &872763313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57906,6 +57945,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: extinquishers.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: extinquishers.Array.data[0]
+      value: 
+      objectReference: {fileID: 871350927}
+    - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
+        type: 3}
+      propertyPath: extinquishers.Array.data[1]
+      value: 
+      objectReference: {fileID: 468042529}
     - target: {fileID: 7620893400242159745, guid: 236f710be518e3d4688ad1445d7a78cd,
         type: 3}
       propertyPath: fireSpawnLocations.Array.size

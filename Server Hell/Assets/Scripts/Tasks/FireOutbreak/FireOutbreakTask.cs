@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class FireOutbreakTask : UrgentTaskBase
@@ -10,6 +11,8 @@ public class FireOutbreakTask : UrgentTaskBase
 
 	[SerializeField] private int minFireSpawnInterval = 20;
 	[SerializeField] private int maxFireSpawnInterval = 40;
+
+	[SerializeField] private List<FireExtinquisherMapIndicator> extinquishers;
 
 	private float countUntilNextFire;
 
@@ -25,6 +28,10 @@ public class FireOutbreakTask : UrgentTaskBase
 		SpawnFire();
 		fireAlarm.SetAlarmStatus(true);
 		base.ActivateTask();
+
+
+		foreach (var ext in extinquishers)
+			ext.gameObject.SetActive(true);
 	}
 
 	private void SpawnFire()
@@ -78,6 +85,15 @@ public class FireOutbreakTask : UrgentTaskBase
 		if (activeFires.Count <= 0)
 		{
 			fireAlarm.SetAlarmStatus(false);
+
+
+			// If there are no other active fires - turn off the indicators.
+			if (TaskManager.Instance.urgentTaskGroup.Count(x => x.task.taskName == this.taskName && x.task.IsActive) <= 1)
+			{
+				foreach (var ext in extinquishers)
+					ext.gameObject.SetActive(false);
+			}
+
 			FireTaskComplete();
 		}
 	}
