@@ -7,6 +7,7 @@ public class TrashTask : TaskBase
 	[SerializeField] private Trashbag trashBagPrefab;
 	[SerializeField] private List<Transform> trashSpawnLocations;
 	[SerializeField] private int startingBagAmount = 5;
+	[SerializeField] private GameObject minimapIndicator;
 
 	public AudioSource completedSound;
 	private List<Trashbag> trashBags = new List<Trashbag>();
@@ -21,6 +22,7 @@ public class TrashTask : TaskBase
 
 	public override void ActivateTask()
 	{
+		minimapIndicator.SetActive(false);
 
 		List<Transform> availLocations = new List<Transform>(trashSpawnLocations);
 
@@ -32,6 +34,8 @@ public class TrashTask : TaskBase
 			var bag = GameObject.Instantiate(trashBagPrefab, spawnLocation);
 			trashBags.Add(bag);
 			bag.TrashThrownAway += TrashProcessed;
+			bag.TrashPickedUp += TrashPickedUp;
+			bag.TrashReleased += TrashReleased;
 		}
 
 		base.ActivateTask();
@@ -41,8 +45,10 @@ public class TrashTask : TaskBase
 	private void TrashProcessed(Trashbag bag)
 	{
 		bag.TrashThrownAway -= TrashProcessed;
+		bag.TrashPickedUp -= TrashPickedUp;
+		bag.TrashReleased -= TrashReleased;
 
-		if(trashBags.Contains(bag))
+		if (trashBags.Contains(bag))
 			trashBags.Remove(bag);
 
 		UpdateTaskName("Throw away trash (" + (startingBagAmount - trashBags.Count) + " / " + startingBagAmount + ")");
@@ -55,5 +61,15 @@ public class TrashTask : TaskBase
 		{
 			FireTaskComplete();
 		}
+	}
+
+	private void TrashPickedUp()
+	{
+		minimapIndicator.SetActive(true);
+	}
+
+	private void TrashReleased()
+	{
+		minimapIndicator.SetActive(false);
 	}
 }

@@ -29,7 +29,8 @@ public class EquipInteractable : MonoBehaviour, IInteractable
         {
             objectCollider.enabled = false;
             rbody.isKinematic = true;
-        }
+			OnInteractSuccess();
+		}
     }
 
     public virtual void DropItem(Vector3 force)
@@ -41,6 +42,7 @@ public class EquipInteractable : MonoBehaviour, IInteractable
             rbody.AddForce(force, ForceMode.Impulse);
     }
 
+	public virtual void OnInteractSuccess() { }
 
     public virtual void ItemUsePressed(InputAction action) { }
 
