@@ -793,7 +793,7 @@ MonoBehaviour:
   completedGameMenuBase: {fileID: 6236000092392073279}
   titleText: {fileID: 6236000092273356271}
   winText: Won Game!
-  loseText: Lose Game!
+  loseText: Sanity Depleted!
   taskManager: {fileID: 0}
   stabilityMeter: {fileID: 0}
   seperationAtOne: 250
